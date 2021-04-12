@@ -1,0 +1,47 @@
+<h1>CREATE NEW COMPANY</h1>
+
+
+<form method="POST" action="/new">
+  <input placeholder= "Company Name" name="name" value="{{name}}">
+  <br>
+  <input placeholder= "Webpage" type="url" name="url" value="{{url}}">
+  <br>
+  <input placeholder= "Email" type="email" value="{{email}}">
+  <br>
+  <input placeholder= "Adress" name="adress" value="{{adress}}">
+  <br>
+    <select name="size" id="size" >
+    {{#each size}}
+    <option value="{{this}}">{{this}}</option>
+    {{/each}}
+  </select>
+  <br>
+    <select name="branch" id="branch" >
+    {{#each branch}}
+    <option value="{{this}}">{{this}}</option>
+    {{/each}}
+  </select>
+  <br>
+
+  <input placeholder= "Description" name="description" value="{{description}}">
+  <br>
+  <p>LOGOPOST</p>
+  <br>
+  <h5>Are you Sustainable?</h5>
+  <p>Social: Question 1</p>
+  <input placeholder= "Assumption 1" name="social1" value="{{social1}}">
+  <br>
+<p>Ecological: Question 2</p>
+  <input placeholder= "Assumption 1" name="ecological1" value="{{ecological1}}">
+  <br>
+  <p>Economic: Question 3</p>
+  <input placeholder= "Assumption 1" name="economic1" value="{{economic1}}">
+  <br>
+  <button type="submit">Create Company</button>
+</form>
+
+  <button>Go back</button>
+
+{{#if errorMessage}}
+<h4 style="color: red;">{{errorMessage}}</h4>
+{{/if}}

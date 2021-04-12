@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const SIZE_ENUM = require("../utils/consts");
-const BRANCH_ENUM = require("../utils/consts");
+const SIZE_ENUM = require("../utils/size-enum");
+const BRANCH_ENUM = require("../utils/branch-enum");
 
 const { Schema, model } = mongoose;
 
