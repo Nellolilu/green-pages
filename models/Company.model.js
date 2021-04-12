@@ -16,7 +16,8 @@ const companySchema = new Schema({
   },
   email: {
     type: String,
-    required: true,
+    requried: true,
+
     // unique because check via URL-match with email
   },
   adress: {
