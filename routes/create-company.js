@@ -88,7 +88,18 @@ router.post("/", (req, res) => {
   });
 });
 
+// THIS ROUTER BELONGS TO INDEX? SHOW COMPANY
+
+router.get("/:mufasa", (req, res) => {
+  Company.findById(req.params.mufasa).then((thisCompany) => {
+    console.log("this is the company", thisCompany);
+    res.render("show-company", { thisCompany });
+  });
+});
+
 // THE ROUTER BELONGS INTO PROFILE ROUTE
+// FIRST AUTH; THEN FINISH
+
 router.get("/edit-company", (req, res) => {
   Company.find({}).then((allCompanies) => {
     console.log("this is all you got", allCompanies);
@@ -118,7 +129,9 @@ router.post("/edit-company", (req, res) => {
   } = req.body;
 
   // Company.findByIdAndUpdate(
-  //   req.session.user.listings._id,
+  //   req.session.user.listings.
+
+  // populate to get _id ?
   //   // id of the company ??
   //   { name, url, email },
   //   // how do I say all??
