@@ -3,6 +3,8 @@
 // const slugify = require("slugify");
 
 // ********* SERIOUS BUGS:
+// DOES THIS ONLY WORK IF AUTH FINISHED?
+// console.log("*******req.session.user:", req.session.user);
 
 // ********* NICE TO SOLVE BUGS:
 // after errorMessage select is empty, message doent go away
@@ -78,7 +80,7 @@ router.post("/", (req, res) => {
       social1,
       ecological1,
       economic1,
-      // owner: req.session.user._id,
+      owner: req.session.user._id,
     }).then((createdCompany) => {
       console.log("created company:", createdCompany);
       res.redirect("/");
@@ -86,17 +88,46 @@ router.post("/", (req, res) => {
   });
 });
 
-// THE ROUTER BELONGS INTO PROFILE
+// THE ROUTER BELONGS INTO PROFILE ROUTE
 router.get("/edit-company", (req, res) => {
   Company.find({}).then((allCompanies) => {
-    console.log("this is all sou got", allCompanies);
+    console.log("this is all you got", allCompanies);
+    // console.log("req.session.user:", req.session.user);
+    // REQ SESSION USER IS UNDEFINED
+    console.log(req.session);
     res.render("edit-company", {
       company: allCompanies[0],
-      // company: req.session.listings,
       branch: BRANCH_ENUM,
       size: SIZE_ENUM,
     });
   });
+});
+
+router.post("/edit-company", (req, res) => {
+  const {
+    name,
+    url,
+    email,
+    adress,
+    size,
+    branch,
+    description,
+    social1,
+    ecological1,
+    economic1,
+  } = req.body;
+
+  // Company.findByIdAndUpdate(
+  //   req.session.user.listings._id,
+  //   // id of the company ??
+  //   { name, url, email },
+  //   // how do I say all??
+  //   { new: true }
+  // ).then((newCompany) => {
+  //   console.log("new Company:", newCompany);
+  //   req.session.user.listings = newCompany;
+  //   res.redirect("/profile");
+  // });
 });
 
 module.exports = router;
