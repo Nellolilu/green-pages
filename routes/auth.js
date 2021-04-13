@@ -19,12 +19,12 @@ router.get("/signup", shouldNotBeLoggedIn, (req, res) => {
 });
 
 router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!username) {
+  if (!email) {
     return res
       .status(400)
-      .render("auth/signup", { errorMessage: "Please provide your username." });
+      .render("auth/signup", { errorMessage: "Please provide your E-Mail-Adress." });
   }
 
   if (password.length < 8) {
@@ -45,13 +45,13 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
   }
   */
 
-  // Search the database for a user with the username submitted in the form
-  User.findOne({ username }).then((found) => {
-    // If the user is found, send the message username is taken
+  // Search the database for a user with the email submitted in the form
+  User.findOne({ email }).then((found) => {
+    // If the email is found, send the message email is taken
     if (found) {
       return res
         .status(400)
-        .render("signup", { errorMessage: "Username already taken." });
+        .render("signup", { errorMessage: "E-mail-adress already taken." });
     }
 
     // if user is not found, create a new user - start with hashing the password
@@ -61,7 +61,8 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
       .then((hashedPassword) => {
         // Create a user and save it in the database
         return User.create({
-          username,
+          name,
+          email,
           password: hashedPassword,
         });
       })
@@ -79,7 +80,7 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
         if (error.code === 11000) {
           return res.status(400).render("auth/signup", {
             errorMessage:
-              "Username need to be unique. The username you chose is already in use.",
+              "The e-mail adress needs to be unique. The e-mail adress you chose is already used.",
           });
         }
         return res
@@ -94,12 +95,12 @@ router.get("/login", shouldNotBeLoggedIn, (req, res) => {
 });
 
 router.post("/login", shouldNotBeLoggedIn, (req, res, next) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!username) {
+  if (!email) {
     return res
       .status(400)
-      .render("auth/login", { errorMessage: "Please provide your username." });
+      .render("auth/login", { errorMessage: "Please provide your e-mail-adress." });
   }
 
   // Here we use the same logic as above
@@ -110,8 +111,8 @@ router.post("/login", shouldNotBeLoggedIn, (req, res, next) => {
     });
   }
 
-  // Search the database for a user with the username submitted in the form
-  User.findOne({ username })
+  // Search the database for a user with the email submitted in the form
+  User.findOne({ email })
     .then((user) => {
       // If the user isn't found, send the message that user provided wrong credentials
       if (!user) {
@@ -150,6 +151,10 @@ router.get("/logout", isLoggedIn, (req, res) => {
     }
     res.redirect("/");
   });
+});
+
+router.get("/edit-user", isLoggedIn, (req, res) => {
+  res.render("auth/edit-user");
 });
 
 module.exports = router;
