@@ -88,14 +88,7 @@ router.post("/", (req, res) => {
   });
 });
 
-// THIS ROUTER BELONGS TO INDEX? SHOW COMPANY
 
-router.get("/:mufasa", (req, res) => {
-  Company.findById(req.params.mufasa).then((thisCompany) => {
-    console.log("this is the company", thisCompany);
-    res.render("show-company", { thisCompany });
-  });
-});
 
 // THE ROUTER BELONGS INTO PROFILE ROUTE
 // FIRST AUTH; THEN FINISH
@@ -107,7 +100,7 @@ router.get("/edit-company", (req, res) => {
     // REQ SESSION USER IS UNDEFINED
     console.log(req.session);
     res.render("edit-company", {
-      company: allCompanies[0],
+      company: allCompanies[0], 
       branch: BRANCH_ENUM,
       size: SIZE_ENUM,
     });
@@ -141,6 +134,15 @@ router.post("/edit-company", (req, res) => {
   //   req.session.user.listings = newCompany;
   //   res.redirect("/profile");
   // });
+});
+
+// THIS ROUTER BELONGS TO INDEX? SHOW COMPANY
+
+router.get("/:mufasa", (req, res) => {
+  Company.findById(req.params.mufasa).then((thisCompany) => {
+    console.log("this is the company", thisCompany);
+    res.render("show-company", { thisCompany });
+  });
 });
 
 module.exports = router;
