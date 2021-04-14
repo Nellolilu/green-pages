@@ -11,12 +11,14 @@
   <input placeholder= "Adress" name="adress" value="{{adress}}">
   <br>
     <select name="size" id="size" >
+    <option disabled selected>company size</option>
     {{#each size}}
     <option value="{{this}}">{{this}}</option>
     {{/each}}
   </select>
   <br>
     <select name="branch" id="branch" >
+      <option disabled selected>branch</option>
     {{#each branch}}
     <option value="{{this}}">{{this}}</option>
     {{/each}}
@@ -40,7 +42,7 @@
   <button type="submit">Create Company</button>
 </form>
 
-  <button>Go back</button>
+<a href="/">Go Home</a>
 
 {{#if errorMessage}}
 <h4 style="color: red;">{{errorMessage}}</h4>
