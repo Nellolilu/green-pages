@@ -1,19 +1,22 @@
 <h1>APPS NAME</h1>
 <p>Edit your profile</p>
 
+{{#with user}}
+
 <form action="/auth/edit-user" method="POST">
    <label> Name
-      <input type="text" name="name">
+      <input placeholder= "Name" name="name" value="{{name}}">
    </label>
    <label> E-Mail Adress
-      <input type="text" name="email adress">
+      <input placeholder= "Email" name="email" value="{{email}}">      
    </label>
    <label> Password
       <input type="password" name="password">
+      <input placeholder= "Password" name="password" value="{{password}}">  
    </label>
    <button type="toggle"><0></button>
    <label> Password
-      <input type="password" name="password">
+      <input placeholder= "Password" name="password" value="{{password}}"> 
    </label>
    <button type="toggle"><0></button>
    <button type="submit">Submit changes</button>
@@ -21,3 +24,10 @@
    <button type="redirect">Go Back</button>
 
 </form>
+
+
+{{/with}}
+
+{{#if errorMessage}}
+<h4 style="color: red;">{{errorMessage}}</h4>
+{{/if}}

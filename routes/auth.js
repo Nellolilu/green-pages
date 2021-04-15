@@ -19,7 +19,7 @@ router.get("/signup", shouldNotBeLoggedIn, (req, res) => {
 });
 
 router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
-  const { email, password } = req.body;
+  const { name, email, password } = req.body;
 
   if (!email) {
     return res
@@ -156,5 +156,7 @@ router.get("/logout", isLoggedIn, (req, res) => {
 router.get("/edit-user", isLoggedIn, (req, res) => {
   res.render("auth/edit-user");
 });
+
+
 
 module.exports = router;
