@@ -31,6 +31,9 @@ app.use("/", index);
 const authRoutes = require("./routes/auth");
 app.use("/auth", authRoutes);
 
+//const profileRoutes = require("./routes/profile");
+//app.use("/profile", profileRoutes);
+
 const companyRoutes = require("./routes/create-company");
 app.use("/create-company", companyRoutes);
 
