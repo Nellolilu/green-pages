@@ -1,7 +1,7 @@
 <h1>CREATE NEW COMPANY</h1>
 
 
-<form method="POST" action="/create-company">
+<form method="POST" action="/create-company" enctype="multipart/form-data">
   <input placeholder= "Company Name" name="name" value="{{name}}">
   <br>
   <input placeholder= "Webpage" type="url" name="url" value="{{url}}">
@@ -27,7 +27,8 @@
 
   <input placeholder= "Description" name="description" value="{{description}}">
   <br>
-  <p>LOGOPOST</p>
+  <input type="file" name="image">
+
   <br>
   <h5>Are you Sustainable?</h5>
   <p>Social: Question 1</p>

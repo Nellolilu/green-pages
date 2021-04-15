@@ -1,6 +1,6 @@
 // TO DOS THURSDAY (FRIDAY)
-// - pictureupload
-// - edit & delete (need a user!!)
+// - edit & delete (need a user!!) inkl. logo change
+// - multiple pictures
 // - Bugfix errormessages & middelware
 
 // TO SET UO SATURDAY
@@ -33,12 +33,14 @@
 
 // GO BACK statt GO HOME
 
+const express = require("express");
 const SIZE_ENUM = require("../utils/size-enum");
 const BRANCH_ENUM = require("../utils/branch-enum");
 const Company = require("../models/Company.model");
 const User = require("../models/User.model");
 // const createErrors = require("../middlewares/createErrors");
-const express = require("express");
+
+const parser = require("../config/cloudinary");
 
 // //test didnt work
 // var alert = require("alert");
@@ -52,7 +54,9 @@ router.get("/", (req, res) => {
   });
 });
 
-router.post("/", (req, res) => {
+router.post("/", parser.single("image"), (req, res) => {
+  console.log("req.file:", req.file);
+  const logo = req.file.path;
   const {
     name,
     url,
@@ -141,6 +145,7 @@ router.post("/", (req, res) => {
       size,
       branch,
       description,
+      logo,
       social1,
       ecological1,
       economic1,
@@ -179,6 +184,7 @@ router.post("/edit-company", (req, res) => {
     size,
     branch,
     description,
+    logo,
     social1,
     ecological1,
     economic1,
