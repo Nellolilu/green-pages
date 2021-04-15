@@ -1,7 +1,9 @@
 // TO DOS THURSDAY (FRIDAY)
-// - edit & delete (need a user!!) inkl. logo change
-// - multiple pictures
+// - Bugfix no fileupload
+// - multiple pictures / picturecut?
 // - Bugfix errormessages & middelware
+
+// - edit & delete (need a user!!) inkl. logo change
 
 // TO SET UO SATURDAY
 // - Index, Profile, Search
@@ -203,15 +205,16 @@ router.post("/edit-company", (req, res) => {
   //   req.session.user.listings = newCompany;
   //   res.redirect("/profile");
   // });
-});
 
-// THIS ROUTER BELONGS TO INDEX? SHOW COMPANY
+  //   THIS ROUTER BELONGS TO INDEX? SHOW COMPANY // ROUTE DOESNT WORK
 
-router.get("/:mufasa", (req, res) => {
-  Company.findById(req.params.mufasa).then((thisCompany) => {
-    console.log("this is the company", thisCompany);
-    res.render("show-company", { thisCompany });
-  });
+  //   router.get("/:mufasa", (req, res) => {
+  //     console.log("req.params", req.params.mufasa);
+  //     Company.findById(req.params.mufasa).then((thisCompany) => {
+  //       console.log("this is the company", thisCompany);
+  //       res.render("show-company", { thisCompany });
+  //     });
+  //   });
 });
 
 module.exports = router;

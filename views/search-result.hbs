@@ -1,0 +1,14 @@
+<h4>THIS IS THE SURCH RESULT</h4>
+
+{{#if companiesList}}
+
+<h1>THIS ARE ALL COMPANIES</h1>
+
+{{#each companiesList}}
+<a href="/create-company/{{this._id}}">{{this.name}} <br> </a>
+{{/each}}
+
+{{else}}
+<h1>THERE ARE NO COMPANIES LISTED</h1>
+<a href="/create-company">create one!</a>
+{{/if}}
