@@ -1,12 +1,10 @@
 // TO DOS THURSDAY (FRIDAY)
-// - Bugfix no fileupload
 // - multiple pictures / picturecut?
-// - Bugfix errormessages & middelware
-
 // - edit & delete (need a user!!) inkl. logo change
+// - branch go selected, check id for email vs. url
 
 // TO SET UO SATURDAY
-// - Index, Profile, Search
+// -  Profile, Search
 
 // MON & TUE
 // - additionals: Network/ rating / Proofpicture
@@ -40,6 +38,7 @@ const SIZE_ENUM = require("../utils/size-enum");
 const BRANCH_ENUM = require("../utils/branch-enum");
 const Company = require("../models/Company.model");
 const User = require("../models/User.model");
+const createCompanyValidation = require("../utils/create-company-validation");
 // const createErrors = require("../middlewares/createErrors");
 
 const parser = require("../config/cloudinary");
@@ -58,7 +57,13 @@ router.get("/", (req, res) => {
 
 router.post("/", parser.single("image"), (req, res) => {
   console.log("req.file:", req.file);
-  const logo = req.file.path;
+  let logo;
+  if (req.file) {
+    logo = req.file.path;
+  }
+
+  //const logo=req.file?.path
+
   const {
     name,
     url,
@@ -74,69 +79,21 @@ router.post("/", parser.single("image"), (req, res) => {
 
   // // to do: error messages  for email does not match
 
-  // if (name.length < 3) {
-  //   // alert("howdy");
-  //   res.render("create-company", {
-  //     errorMessage: "please add your companies name",
-  //   });
-  //   return;
-  // }
-
-  // if (url.length < 16) {
-  //   // alert("howdy");
-  //   res.render("create-company", {
-  //     errorMessage: "please fill in a complete url",
-  //   });
-  //   return;
-  // }
-
-  // // to do: error messages  for email does not match
-  // if (email.length < 8) {
-  //   // alert("howdy");
-  //   res.render("create-company", {
-  //     errorMessage: "please fill in a complete emailadress",
-  //   });
-  //   return;
-  // }
-
-  // if (adress.length < 4) {
-  //   // alert("howdy");
-  //   res.render("create-company", {
-  //     errorMessage: "please share your adress",
-  //   });
-  //   return;
-  // }
-
-  // if (size.length < 1) {
-  //   // alert("howdy");
-  //   res.render("create-company", {
-  //     errorMessage: "please pick a size for your company",
-  //   });
-  //   return;
-  // }
-
-  // if (branch.length < 1) {
-  //   // alert("howdy");
-  //   res.render("create-company", {
-  //     errorMessage: "please pick a branch for your company",
-  //   });
-  //   return;
-  // }
-
-  // // to do: error messages  for email does not match
-
-  // // only works if the input stays
-  // if (social1 < 1 || ecological1 < 1 || economic1 < 1) {
-  //   res.render("create-company", {
-  //     errorMessage: "are you sure you dont want to go transparent?",
-  //   });
-  //   return;
-  // }
+  const errorMessage = createCompanyValidation(req.body);
+  if (errorMessage) {
+    return res.render("create-company", {
+      errorMessage,
+      branch: BRANCH_ENUM,
+      size: SIZE_ENUM,
+    });
+  }
 
   Company.findOne({ url }).then((found) => {
     if (found) {
       return res.render("create-company", {
         errorMessage: "sorry, that company already exists.",
+        branch: BRANCH_ENUM,
+        size: SIZE_ENUM,
       });
     }
     Company.create({
@@ -162,20 +119,25 @@ router.post("/", parser.single("image"), (req, res) => {
 // THE ROUTER BELONGS INTO PROFILE ROUTE
 // FIRST AUTH; THEN FINISH
 
-// NEED A PARAMS FOR ID CHECK
-router.get("/edit-company", (req, res) => {
-  Company.find({}).then((allCompanies) => {
-    console.log("this is all you got", allCompanies);
-    // console.log("req.session.user:", req.session.user);
-    // REQ SESSION USER IS UNDEFINED
-    console.log(req.session);
-    res.render("edit-company", {
-      company: allCompanies[0],
-      branch: BRANCH_ENUM,
-      size: SIZE_ENUM,
-    });
-  });
-});
+// // NEED A PARAMS FOR ID CHECK
+// router.get("/edit-company", (req, res) => {
+
+//   // find by id  - /:eder3r /edit
+//   // :eder3r -- send branch, size
+//   //
+
+//   // Company.find({}).then((allCompanies) => {
+//   //   console.log("this is all you got", allCompanies);
+//   //   // console.log("req.session.user:", req.session.user);
+
+//     console.log(req.session);
+//     res.render("edit-company", {
+//       company: allCompanies[0],
+//       branch: BRANCH_ENUM,
+//       size: SIZE_ENUM,
+//     });
+//   });
+// });
 
 router.post("/edit-company", (req, res) => {
   const {
@@ -205,16 +167,6 @@ router.post("/edit-company", (req, res) => {
   //   req.session.user.listings = newCompany;
   //   res.redirect("/profile");
   // });
-
-  //   THIS ROUTER BELONGS TO INDEX? SHOW COMPANY // ROUTE DOESNT WORK
-
-  //   router.get("/:mufasa", (req, res) => {
-  //     console.log("req.params", req.params.mufasa);
-  //     Company.findById(req.params.mufasa).then((thisCompany) => {
-  //       console.log("this is the company", thisCompany);
-  //       res.render("show-company", { thisCompany });
-  //     });
-  //   });
 });
 
 module.exports = router;

@@ -11,9 +11,11 @@
   <br>
   <input placeholder= "Adress" name="adress" value="{{adress}}">
   <br>
-    <select name="size" id="size" >
+    <select name="size" id="size"  >
     {{#each size}}
-    <option value="{{this}}">{{this}}</option>
+    <option 
+    {{!-- if this ==== this then option with selected // option if not selected --}}
+    value="{{this}}">{{this}}</option>
     {{/each}}
   </select>
   <br>
