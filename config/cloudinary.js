@@ -12,6 +12,18 @@ const storage = new CloudinaryStorage({
   cloudinary,
   params: {
     folder: "companylogos",
+    // allowedFormats: ["jpg", "png"],
+    // transformation: [{ width: 200, height: 200, crop: "limit" }],
+
+    // params: async (req, file) => {
+    //   // async code using `req` and `file`
+    //   // ...
+    //   return {
+    //     folder: 'folder_name',
+    //     format: 'jpeg',
+    //     public_id: 'some_unique_id',
+    //   };
+    // },
   },
 });
 

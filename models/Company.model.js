@@ -61,6 +61,8 @@ const companySchema = new Schema({
     type: String,
     max: 100,
   },
+
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
 const Company = model("Company", companySchema);

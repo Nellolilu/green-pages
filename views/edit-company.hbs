@@ -2,7 +2,7 @@
 
 {{#with company}}
 
-<form method="POST" action="/edit-company">
+<form method="POST" action="/{{_id}}/edit-company">
   <input placeholder= "Company Name" name="name" value="{{name}}">
   <br>
   <input placeholder= "Webpage" type="url" name="url" value="{{url}}">
@@ -11,21 +11,10 @@
   <br>
   <input placeholder= "Adress" name="adress" value="{{adress}}">
   <br>
-    <select name="size" id="size"  >
-    {{#each size}}
-    <option 
-    {{!-- if this ==== this then option with selected // option if not selected --}}
-    value="{{this}}">{{this}}</option>
-    {{/each}}
-  </select>
   <br>
-    <select name="branch" id="branch" >
-    {{#each branch}}
-    <option value="{{this}}">{{this}}</option>
-    {{/each}}
-  </select>
+  <p>your Branch: {{branch}}</p>
+  <p>your Companysize: {{size}}</p>
   <br>
-
   <input placeholder= "Description" name="description" value="{{description}}">
   <br>
   <p>LOGOPOST</p>
@@ -40,17 +29,30 @@
   <p>Economic: Question 3</p>
   <input placeholder= "Assumption 1" name="economic1" value="{{economic1}}">
   <br>
-  <button type="submit">Create Company</button>
+  <button type="submit">send changes</button>
 </form>
 
 <a href="/">Go Home</a>
-
-
-
 {{/with}}
+
 
 
 
 {{#if errorMessage}}
 <h4 style="color: red;">{{errorMessage}}</h4>
 {{/if}}
+
+{{!-- DOESNT WORK WITHIN WITH COMPANY _ CSS or checkout the option selected --}}
+    <select name="otherBranches" id="otherBranches" >
+          {{!-- <option selected>{{branch}}</option> --}}
+    {{#each otherBranches}}
+    <option value="{{this}}">{{this}}</option>
+    {{/each}}
+  </select>
+
+    <select name="otherSizes" id="otherSizes" >
+          {{!-- <option selected>{{branch}}</option> --}}
+    {{#each otherSizes}}
+    <option value="{{this}}">{{this}}</option>
+    {{/each}}
+  </select>

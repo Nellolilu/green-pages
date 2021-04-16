@@ -1,7 +1,8 @@
 // TO DOS THURSDAY (FRIDAY)
 // - multiple pictures / picturecut?
 // - edit & delete (need a user!!) inkl. logo change
-// - branch go selected, check id for email vs. url
+// - branch go selected - not smooth yet
+//check id for email vs. url
 
 // TO SET UO SATURDAY
 // -  Profile, Search
@@ -39,16 +40,13 @@ const BRANCH_ENUM = require("../utils/branch-enum");
 const Company = require("../models/Company.model");
 const User = require("../models/User.model");
 const createCompanyValidation = require("../utils/create-company-validation");
-// const createErrors = require("../middlewares/createErrors");
-
+const isLoggedMiddleware = require("../middlewares/isLoggedIn");
+const shouldNotBeLoggedIn = require("../middlewares/shouldNotBeLoggedIn");
 const parser = require("../config/cloudinary");
-
-// //test didnt work
-// var alert = require("alert");
-
 const router = express.Router();
 
 router.get("/", (req, res) => {
+  console.log("user:", req.session.user);
   res.render("create-company", {
     branch: BRANCH_ENUM,
     size: SIZE_ENUM,
@@ -108,7 +106,7 @@ router.post("/", parser.single("image"), (req, res) => {
       social1,
       ecological1,
       economic1,
-      // owner: req.session.user._id,
+      owner: req.session.user._id,
     }).then((createdCompany) => {
       console.log("created company:", createdCompany);
       res.redirect("/");
@@ -120,44 +118,136 @@ router.post("/", parser.single("image"), (req, res) => {
 // FIRST AUTH; THEN FINISH
 
 // // NEED A PARAMS FOR ID CHECK
-// router.get("/edit-company", (req, res) => {
+router.get("/:mufasa/edit-company", (req, res) => {
+  Company.findById(req.params.mufasa)
+    .populate("owner")
+    .then((thisCompany) => {
+      console.log(
+        "this is the company",
+        thisCompany
+        //   "owner id",
+        //   thisCompany.owner._id,
+        //   "session_id",
+        //   req.session.user._id,
+        //   thisCompany.owner._id === req.session.user._id
+        //   WHY IS ID FALSE??
+      );
+      // console.log("req.session.user:", req.session.user);
 
-//   // find by id  - /:eder3r /edit
-//   // :eder3r -- send branch, size
-//   //
+      // NO NEED BECAUSE OF CATCH
+      // if (!thisCompany) {
+      //   console.log("breeak");
+      //   res.redirect("/");
+      // }
 
-//   // Company.find({}).then((allCompanies) => {
-//   //   console.log("this is all you got", allCompanies);
-//   //   // console.log("req.session.user:", req.session.user);
+      // CHECK OWNERSHIP
+      let isOwner = false;
+      if (req.session.user) {
+        if (thisCompany.owner.email === req.session.user.email) {
+          isOwner = true;
+          // console.log("isOwner:", isOwner);
+        }
+      }
 
-//     console.log(req.session);
-//     res.render("edit-company", {
-//       company: allCompanies[0],
-//       branch: BRANCH_ENUM,
-//       size: SIZE_ENUM,
-//     });
-//   });
-// });
+      // console.log("otherBranches:", otherBranches);
 
-router.post("/edit-company", (req, res) => {
-  const {
-    name,
-    url,
-    email,
-    adress,
-    size,
-    branch,
-    description,
-    logo,
-    social1,
-    ecological1,
-    economic1,
-  } = req.body;
+      if (isOwner) {
+        res.render("edit-company", {
+          company: thisCompany,
+          otherBranches: BRANCH_ENUM.filter(
+            (BRANCH_ENUM) => BRANCH_ENUM !== thisCompany.branch
+          ),
+          otherSizes: SIZE_ENUM.filter(
+            (SIZE_ENUM) => SIZE_ENUM !== thisCompany.size
+          ),
+        });
+      } else {
+        res.redirect("/");
+      }
+    })
+    .catch((err) => {
+      console.log("err:", err);
+      console.log("DOESNT EXIST ?! - GO HOME AND TRY AGAIN");
+      res.redirect("/");
+    });
+});
+
+router.post("/:mufasa/edit-company", (req, res) => {
+  Company.findById(req.params.mufasa)
+    .populate("owner")
+    .then((thisCompany) => {
+      // OWNERSHIP
+      let isOwner = false;
+      if (req.session.user) {
+        if (thisCompany.owner.email === req.session.user.email) {
+          isOwner = true;
+        }
+      }
+      //ENUM WORK
+      const otherBranches = BRANCH_ENUM.filter(
+        (BRANCH_ENUM) => BRANCH_ENUM !== thisCompany.branch
+      );
+      const otherSizes = SIZE_ENUM.filter(
+        (SIZE_ENUM) => SIZE_ENUM !== thisCompany.size
+      );
+      console.log("otherSizes:", otherSizes);
+
+      if (isOwner) {
+        // UPDATE
+        Company.findByIdAndUpdate(
+          req.params.mufasa,
+          {
+            name,
+            // url,
+            // email,
+            // adress,
+            // // size,
+            // // branch,
+            // description,
+            // // logo,
+            // social1,
+            // ecological1,
+            // economic1,
+          },
+          { new: true }
+        ).then((newCompany) => {
+          console.log("newCompany", newCompany);
+          res.redirect("/search-result");
+        });
+
+        //RENDER
+
+        // res.render("edit-company", {
+        //   company: thisCompany,
+        //   otherBranches: otherBranches,
+        //   otherSizes: otherSizes,
+        // });
+      } else {
+        res.redirect("/");
+      }
+    })
+    .catch((err) => {
+      console.log("err:", err);
+      console.log("DOESNT EXIST ?! - GO HOME AND TRY AGAIN");
+      res.redirect("/");
+    });
+
+  // const {
+  //   name,
+  //   url,
+  //   email,
+  //   adress,
+  //   size,
+  //   branch,
+  //   description,
+  //   logo,
+  //   social1,
+  //   ecological1,
+  //   economic1,
+  // } = req.body;
 
   // Company.findByIdAndUpdate(
   //   req.session.user.listings.
-
-  // populate to get _id ?
   //   // id of the company ??
   //   { name, url, email },
   //   // how do I say all??
