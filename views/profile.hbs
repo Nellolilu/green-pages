@@ -2,6 +2,20 @@
 
 <h5> Hi {{name}}!</h5>
 
-<a href="/profile/edit">Edit your profile</a>
+<a href="/profile/edit">Edit</a>
+
+<h5> YOUR LISTINGS</h5>
+
+
+
+{{#if listings}}
+{{#each listings}}
+<a>
+  <p>{{this.name}}</p>
+</a>
+{{/each}}
+{{else}}
+<p> No listings created.</p>
+{{/if}}
 
 {{/with}}
