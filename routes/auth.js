@@ -24,7 +24,9 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
   if (!email) {
     return res
       .status(400)
-      .render("auth/signup", { errorMessage: "Please provide your E-Mail-Adress." });
+      .render("auth/signup", {
+        errorMessage: "Please provide your E-Mail-Adress.",
+      });
   }
 
   if (password.length < 8) {
@@ -100,7 +102,9 @@ router.post("/login", shouldNotBeLoggedIn, (req, res, next) => {
   if (!email) {
     return res
       .status(400)
-      .render("auth/login", { errorMessage: "Please provide your e-mail-adress." });
+      .render("auth/login", {
+        errorMessage: "Please provide your e-mail-adress.",
+      });
   }
 
   // Here we use the same logic as above
@@ -169,7 +173,5 @@ router.get("/:whatever/edit-user", isLoggedIn, (req, res) => {
 //  }
 });
 });
-
-
 
 module.exports = router;

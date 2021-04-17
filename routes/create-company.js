@@ -1,5 +1,4 @@
-// - edit & delete (need a user!!)
-// logo change
+// Middelware
 // -  Profile, Search
 
 // NICE TO SKIPS?
