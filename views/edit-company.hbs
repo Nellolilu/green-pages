@@ -12,12 +12,24 @@
   <input placeholder= "Adress" name="adress" value="{{adress}}">
   <br>
   <br>
-  <p>your Branch: {{branch}}</p>
-  <p>your Companysize: {{size}}</p>
-  <br>
+
+  <select name="branch" id="otherBranches" >
+    <option selected>{{branch}}</option>
+    {{#each ../otherBranches}}
+    <option value="{{this}}">{{this}}</option>
+    {{/each}}
+  </select> 
+
+  <select name="size" id="otherSizes" >
+          <option selected>{{size}}</option>
+    {{#each ../otherSizes}}
+    <option value="{{this}}">{{this}}</option>
+    {{/each}}
+  </select>
+
   <input placeholder= "Description" name="description" value="{{description}}">
   <br>
-  <p>LOGOPOST</p>
+  <input type="file" name="logo">
   <br>
   <h5>Are you Sustainable?</h5>
   <p>Social: Question 1</p>
@@ -42,17 +54,3 @@
 <h4 style="color: red;">{{errorMessage}}</h4>
 {{/if}}
 
-{{!-- DOESNT WORK WITHIN WITH COMPANY _ CSS or checkout the option selected --}}
-    <select name="otherBranches" id="otherBranches" >
-          {{!-- <option selected>{{branch}}</option> --}}
-    {{#each otherBranches}}
-    <option value="{{this}}">{{this}}</option>
-    {{/each}}
-  </select>
-
-    <select name="otherSizes" id="otherSizes" >
-          {{!-- <option selected>{{branch}}</option> --}}
-    {{#each otherSizes}}
-    <option value="{{this}}">{{this}}</option>
-    {{/each}}
-  </select>

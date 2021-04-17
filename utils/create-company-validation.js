@@ -24,10 +24,10 @@ module.exports = (body) => {
   if (adress.length < 4) {
     return "please share your adress";
   }
-  if (size.length < 1) {
+  if (size < 1) {
     return "please pick a size for your company";
   }
-  if (branch.length < 1) {
+  if (branch < 1) {
     return "please pick a branch for your company";
   }
 
