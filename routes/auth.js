@@ -153,8 +153,21 @@ router.get("/logout", isLoggedIn, (req, res) => {
   });
 });
 
-router.get("/edit-user", isLoggedIn, (req, res) => {
-  res.render("auth/edit-user");
+router.get("/:whatever/edit-user", isLoggedIn, (req, res) => {
+  User.findById(req.params.whatever)
+    .then((thisUser) => {
+      // CHECK User
+//      let isOwner = false;
+//        if (thisUser.user.email === req.session.user.email) {
+//          isOwner = true;
+//      }
+//      if (isOwner) {
+  res.render("auth/edit-user", {
+    user: thisUser })
+  // } else {
+  //   res.redirect("/");
+//  }
+});
 });
 
 

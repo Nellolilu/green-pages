@@ -3,7 +3,7 @@
 
 {{#with user}}
 
-<form method="POST" action="/auth/edit-user" >
+<form method="POST" action="/auth/{{_id}}/edit-user" >
    <label> Name
       <input placeholder= "Name" name="name" value="{{name}}">
    </label>
