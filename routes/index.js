@@ -5,6 +5,7 @@ const createCompanyValidation = require("../utils/create-company-validation");
 const isLoggedMiddleware = require("../middlewares/isLoggedIn");
 const shouldNotBeLoggedIn = require("../middlewares/shouldNotBeLoggedIn");
 const parser = require("../config/cloudinary");
+const User = require("../models/User.model");
 
 const router = require("express").Router();
 
@@ -65,7 +66,7 @@ router.get("/:mufasa/edit-company", (req, res) => {
     });
 });
 
-router.post("/:mufasa/edit-company", (req, res) => {
+router.post("/:mufasa/edit-company", parser.single("logo"), (req, res) => {
   const {
     name,
     url,
@@ -128,6 +129,43 @@ router.post("/:mufasa/edit-company", (req, res) => {
       console.log("err:", err);
       console.log("DOESNT EXIST ?! - GO HOME AND TRY AGAIN");
       res.redirect("/");
+    });
+});
+
+router.get("/:mufasa/delete", (req, res) => {
+  Company.findById(req.params.mufasa)
+    .populate("owner")
+    .then((thisCompany) => {
+      console.log("this exists", thisCompany);
+
+      if (!thisCompany) {
+        res.redirect("/");
+      }
+      // CHECK OWNERSHIP
+      let isOwner = false;
+      if (req.session.user) {
+        if (thisCompany.owner.email === req.session.user.email) {
+          isOwner = true;
+        }
+      }
+
+      // IS OWNER
+      if (isOwner) {
+        console.log("you are the owner");
+        Company.findByIdAndDelete(thisCompany._id).then(() => {
+          User.findByIdAndUpdate(thisCompany.owner._id, {
+            $pull: { listings: thisCompany._id },
+          }).then(() => {
+            res.redirect("/search-result");
+          });
+        });
+      }
+
+      // IF NOT OWNER
+      else {
+        console.log("you are not the owner");
+        res.redirect("/");
+      }
     });
 });
 

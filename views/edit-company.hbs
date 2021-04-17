@@ -2,7 +2,7 @@
 
 {{#with company}}
 
-<form method="POST" action="/{{_id}}/edit-company">
+<form method="POST" action="/{{_id}}/edit-company" enctype="multipart/form-data">
   <input placeholder= "Company Name" name="name" value="{{name}}">
   <br>
   <input placeholder= "Webpage" type="url" name="url" value="{{url}}">
@@ -44,8 +44,12 @@
   <button type="submit">send changes</button>
 </form>
 
+
+<a href="/{{_id}}/delete">DELETE THIS LISTING</a>
+
 <a href="/">Go Home</a>
 {{/with}}
+
 
 
 

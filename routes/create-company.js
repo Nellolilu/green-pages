@@ -3,7 +3,7 @@
 // -  Profile, Search
 
 // NICE TO SKIPS?
-// - multiple pictures / picturecut?
+// - picture presettings
 // - branch go selected - not smooth yet
 //check id for email vs. url
 // go back? - skip it
