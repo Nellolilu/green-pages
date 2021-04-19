@@ -1,11 +1,8 @@
-// Middelware
-// -  Profile, Search
+// Middelwares
 
 // NICE TO SKIPS?
 // - picture presettings
-// - branch go selected - not smooth yet
 //check id for email vs. url
-// go back? - skip it
 
 // MON & TUE
 // - additionals: Network/ rating / Proofpicture
@@ -59,8 +56,8 @@ router.post("/", parser.single("image"), (req, res) => {
   if (req.file) {
     logo = req.file.path;
   }
-
-  //const logo=req.file?.path
+  let answers = 0;
+  let proofed = 0;
 
   const {
     name,
@@ -76,6 +73,19 @@ router.post("/", parser.single("image"), (req, res) => {
     otherBranches,
     otherSizes,
   } = req.body;
+
+  if (social1.length > 0) {
+    answers += 1;
+    console.log("answers", answers);
+  }
+  if (economic1.length > 0) {
+    answers += 1;
+    console.log("answers", answers);
+  }
+  if (ecological1.length > 0) {
+    answers += 1;
+    console.log("answers", answers);
+  }
 
   // // to do: error messages  for email does not match
 
@@ -108,9 +118,9 @@ router.post("/", parser.single("image"), (req, res) => {
       social1,
       ecological1,
       economic1,
+      answers,
       owner: req.session.user._id,
     }).then((createdCompany) => {
-      console.log("created company:", createdCompany);
       res.redirect("/");
     });
   });

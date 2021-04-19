@@ -33,6 +33,7 @@ router.get("/show/:mufasa", (req, res) => {
   console.log("req.params", req.params.mufasa);
   Company.findById(req.params.mufasa).then((thisCompany) => {
     console.log("this is the company", thisCompany);
+
     res.render("show-company", { thisCompany });
   });
 });

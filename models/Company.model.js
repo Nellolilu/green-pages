@@ -62,6 +62,9 @@ const companySchema = new Schema({
     max: 100,
   },
 
+  answers: { type: Number, default: 0 },
+  proofed: { type: Number, default: 0 },
+
   owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
