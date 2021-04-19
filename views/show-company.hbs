@@ -16,6 +16,16 @@
 
 <a href="/{{this._id}}/edit-company">Edit</a>
 
+{{#if doesNotRememberYet}}
+<a href="/show/{{_id}}/remember">remember this</a>
+{{/if}} 
+
+{{#if forgetAbout}}
+<a href="/show/{{_id}}/leave">forget about</a>
+{{/if}}
+
+
+
 <br>
 <br>
 {{/with}}

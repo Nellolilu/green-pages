@@ -63,7 +63,8 @@ const companySchema = new Schema({
   },
 
   answers: { type: Number, default: 0 },
-  proofed: { type: Number, default: 0 },
+  // proofed: { type: Number, default: 0 },
+  // coworker: [{ type: mongoose.Schema.Types.ObjectId, ref: "Company" }],
 
   owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });

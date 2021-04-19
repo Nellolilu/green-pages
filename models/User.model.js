@@ -18,6 +18,7 @@ const userSchema = new Schema({
     required: true,
   },
   listings: [{ type: mongoose.Schema.Types.ObjectId, ref: "Company" }],
+  remember: [{ type: mongoose.Schema.Types.ObjectId, ref: "Company" }],
 });
 
 const User = mongoose.model("User", userSchema);

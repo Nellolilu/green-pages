@@ -2,34 +2,15 @@
 
 // NICE TO SKIPS?
 // - picture presettings
+// THE ANSWERS COUNT IS NOT STABIL TO MANUAL CHANGES IN DATABASE
 //check id for email vs. url
 
 // MON & TUE
 // - additionals: Network/ rating / Proofpicture
 
-// TUE NIGHT
-// - set up CSS looks
-
 // ******** USEFUL LATER
 // const isLoggedMiddleware = require("../middlewares/MustBeLoggedIn");
 // const slugify = require("slugify");
-
-// ********* SERIOUS BUGS:
-// DOES THIS ONLY WORK IF AUTH FINISHED?
-// console.log("*******req.session.user:", req.session.user);
-// after errorMessage select is empty, message doent go away, ENUMS broken, also in edit
-
-// ********* NICE TO SOLVE BUGS:
-
-//ERROR MESSAGES
-
-// middelware does not work
-// May exchange errormessage to alerts? to keep contents
-// enum required message breaks.
-
-// CHECK EMAIL FOR COMANY
-
-// GO BACK statt GO HOME
 
 const express = require("express");
 const SIZE_ENUM = require("../utils/size-enum");
@@ -52,6 +33,8 @@ router.get("/", (req, res) => {
 
 router.post("/", parser.single("image"), (req, res) => {
   console.log("req.file:", req.file);
+  console.log("req.files:", req.files);
+
   let logo;
   if (req.file) {
     logo = req.file.path;

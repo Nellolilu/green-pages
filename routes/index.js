@@ -14,13 +14,6 @@ router.get("/", (req, res, next) => {
   res.render("index");
 });
 
-router.get("/", (req, res) => {
-  const companyName = new RegExp(req.query.company, "i");
-  Company.find({ name: { $regex: companyName } }).then();
-  console.log("allresults:", companiesList);
-  res.render("show-result", { companiesList });
-});
-
 router.get("/search-result", (req, res) => {
   const companyName = new RegExp(req.query.company, "i");
   Company.find({ name: { $regex: companyName } }).then((allCompanies) => {
@@ -33,7 +26,6 @@ router.get("/show/:mufasa", (req, res) => {
   console.log("req.params", req.params.mufasa);
   Company.findById(req.params.mufasa).then((thisCompany) => {
     console.log("this is the company", thisCompany);
-
     res.render("show-company", { thisCompany });
   });
 });
@@ -86,6 +78,7 @@ router.post("/:mufasa/edit-company", parser.single("logo"), (req, res) => {
     social1,
     ecological1,
     economic1,
+    answers,
   } = req.body;
 
   console.log(req.body);
@@ -102,6 +95,8 @@ router.post("/:mufasa/edit-company", parser.single("logo"), (req, res) => {
       }
 
       if (isOwner) {
+        let answers = 0;
+
         const updater = {
           name,
           url,
@@ -113,13 +108,28 @@ router.post("/:mufasa/edit-company", parser.single("logo"), (req, res) => {
           social1,
           ecological1,
           economic1,
+          answers,
         };
 
-        // console.log(updater);
+        console.log("this is the updater", updater);
 
         if (req.file) {
           updater.logo = req.file.path;
         }
+
+        if (updater.social1.length > 0) {
+          updater.answers += 1;
+          console.log("answers", answers);
+        }
+        if (updater.economic1.length > 0) {
+          updater.answers += 1;
+          console.log("answers", answers);
+        }
+        if (updater.ecological1.length > 0) {
+          updater.answers += 1;
+          console.log("answers", answers);
+        }
+
         // UPDATE
         Company.findByIdAndUpdate(req.params.mufasa, updater, {
           new: true,
@@ -138,6 +148,56 @@ router.post("/:mufasa/edit-company", parser.single("logo"), (req, res) => {
       console.log("DOESNT EXIST ?! - GO HOME AND TRY AGAIN");
       res.redirect("/");
     });
+});
+
+// *********** is logged middelware needs here, need check if already existing in coworker
+// THIS VERSION WORKS LIKE A PERSONAL WISHLIST
+router.get("/show/:mufasa/remember", (req, res) => {
+  Company.findById(req.params.mufasa).then((foundCompany) => {
+    console.log("found", foundCompany);
+    // console.log("this user", req.session.user);
+    if (!foundCompany) {
+      res.redirect("/");
+    }
+
+    // ************* NEXT: CHECKS FOR USER / ALREADY REMEMBER / LEAVE
+
+    let doesNotRememberYet;
+    let forgetAbout;
+
+    //DOESNT WORK YET
+    // if (!req.session.user) {
+    //   res.render("/show-company", {
+    //     foundCompany,
+    //     errormessage: "please log in for this feature",
+    //   });
+    // }
+
+    // // CHECK OWNERSHIP
+    // let isOwner = false;
+    // if (req.session.user) {
+    //   if (foundCompany.owner.email === req.session.user.email) {
+    //     isOwner = true;
+    //   }
+    // }
+    // IS NOT OWNER
+    // if (!isOwner) {
+    //   console.log("you are the not owner");
+    User.findByIdAndUpdate(
+      req.session.user._id,
+      { $addToSet: { remember: foundCompany._id } },
+      { new: true }
+    ).then((updatedUser) => {
+      console.log("see if you remember:", updatedUser);
+      res.redirect("/search-result");
+    });
+    // }
+    // IF OWNER
+    // else {
+    //   console.log("you are not the owner");
+    //   res.redirect("/");
+    // }
+  });
 });
 
 router.get("/:mufasa/delete", (req, res) => {

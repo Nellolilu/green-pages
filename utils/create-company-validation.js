@@ -31,7 +31,7 @@ module.exports = (body) => {
     return "please pick a branch for your company";
   }
 
-  if (social1 < 1 || ecological1 < 1 || economic1 < 1) {
-    return "are you sure you dont want to go transparent?";
-  }
+  // if (social1 < 1 || ecological1 < 1 || economic1 < 1) {
+  //   return "are you sure you dont want to go transparent?";
+  // }
 };
