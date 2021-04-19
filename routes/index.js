@@ -14,6 +14,13 @@ router.get("/", (req, res, next) => {
   res.render("index");
 });
 
+router.get("/", (req, res) => {
+  const companyName = new RegExp(req.query.company, "i");
+  Company.find({ name: { $regex: companyName } }).then();
+  console.log("allresults:", companiesList);
+  res.render("show-result", { companiesList });
+});
+
 router.get("/search-result", (req, res) => {
   const companyName = new RegExp(req.query.company, "i");
   Company.find({ name: { $regex: companyName } }).then((allCompanies) => {
