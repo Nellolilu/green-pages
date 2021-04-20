@@ -1,23 +1,20 @@
+//edit user needs to be updated, bright potato can help
+
 const router = require("express").Router();
 
 // ℹ️ Handles password encryption
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
-
 // How many rounds should bcrypt run the salt (default [10 - 12 rounds])
 const saltRounds = 10;
-
 // Require the User model in order to interact with the database
 const User = require("../models/User.model");
-
 // Require necessary middlewares in order to control access to specific routes
 const shouldNotBeLoggedIn = require("../middlewares/shouldNotBeLoggedIn");
 const isLoggedIn = require("../middlewares/isLoggedIn");
-
 router.get("/signup", shouldNotBeLoggedIn, (req, res) => {
   res.render("auth/signup");
 });
-
 router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
   const { name, email, password } = req.body;
 
@@ -32,11 +29,9 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
       errorMessage: "Your password needs to be at least 8 characters long.",
     });
   }
-
   //   ! This use case is using a regular expression to control for special characters and min length
   /*
   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
-
   if (!regex.test(password)) {
     return res.status(400).render("signup", {
       errorMessage:
@@ -44,7 +39,6 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
     });
   }
   */
-
   // Search the database for a user with the email submitted in the form
   User.findOne({ email }).then((found) => {
     // If the email is found, send the message email is taken
@@ -53,7 +47,6 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
         .status(400)
         .render("signup", { errorMessage: "E-mail-adress already taken." });
     }
-
     // if user is not found, create a new user - start with hashing the password
     return bcrypt
       .genSalt(saltRounds)
@@ -89,11 +82,9 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
       });
   });
 });
-
 router.get("/login", shouldNotBeLoggedIn, (req, res) => {
   res.render("auth/login");
 });
-
 router.post("/login", shouldNotBeLoggedIn, (req, res, next) => {
   const { email, password } = req.body;
 
@@ -110,7 +101,6 @@ router.post("/login", shouldNotBeLoggedIn, (req, res, next) => {
       errorMessage: "Your password needs to be at least 8 characters long.",
     });
   }
-
   // Search the database for a user with the email submitted in the form
   User.findOne({ email })
     .then((user) => {
@@ -120,7 +110,6 @@ router.post("/login", shouldNotBeLoggedIn, (req, res, next) => {
           .status(400)
           .render("auth/login", { errorMessage: "Wrong credentials." });
       }
-
       // If user is found based on the username, check if the in putted password matches the one saved in the database
       bcrypt.compare(password, user.password).then((isSamePassword) => {
         if (!isSamePassword) {
@@ -133,7 +122,6 @@ router.post("/login", shouldNotBeLoggedIn, (req, res, next) => {
         return res.redirect("/");
       });
     })
-
     .catch((err) => {
       // in this case we are sending the error handling to the error handling middleware that is defined in the error handling file
       // you can just as easily run the res.status that is commented out below
@@ -141,7 +129,6 @@ router.post("/login", shouldNotBeLoggedIn, (req, res, next) => {
       // return res.status(500).render("login", { errorMessage: err.message });
     });
 });
-
 router.get("/logout", isLoggedIn, (req, res) => {
   req.session.destroy((err) => {
     if (err) {
@@ -153,20 +140,32 @@ router.get("/logout", isLoggedIn, (req, res) => {
   });
 });
 
-router.get("/:whatever/edit-user", isLoggedIn, (req, res) => {
-  User.findById(req.params.whatever).then((thisUser) => {
-    // CHECK User
-    //      let isOwner = false;
-    //        if (thisUser.user.email === req.session.user.email) {
-    //          isOwner = true;
-    //      }
-    //      if (isOwner) {
-    res.render("auth/edit-user", {
-      user: thisUser,
-    });
-    // } else {
-    //   res.redirect("/");
-    //  }
+router.get("/edit-user", isLoggedIn, (req, res) => {
+  res.render("auth/edit-user", {
+    user: req.session.user,
+  });
+});
+
+router.post("/edit-user", (req, res) => {
+  const { name, email, password } = req.body;
+
+  console.log(req.body);
+
+  User.findById(req.session.user._id).then((thisUser) => {
+    const updatedUser = {
+      name,
+      email,
+      password,
+    };
+
+    console.log("this is the updated user", updatedUser);
+
+    User.findByIdAndUpdate(req.session.user._id, updatedUser).then(
+      (newUser) => {
+        console.log("newUser", newUser);
+        res.redirect("/profile");
+      }
+    );
   });
 });
 
