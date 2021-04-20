@@ -1,12 +1,12 @@
-// Middelwares
+// CHECK OR SKIP
 
-// NICE TO SKIPS?
-// - picture presettings
+// check Middelwares / authorities
+// delete pictureproofes
+// count proofes
 // THE ANSWERS COUNT IS NOT STABIL TO MANUAL CHANGES IN DATABASE
-//check id for email vs. url
-
-// MON & TUE
-// - additionals: Network/ rating / Proofpicture
+// no ID CHECK WITH COMPANY URL
+// create a wishlist for the profile (already existing)
+// slugify would be nice
 
 // ******** USEFUL LATER
 // const isLoggedMiddleware = require("../middlewares/MustBeLoggedIn");
@@ -39,6 +39,8 @@ router.post("/", parser.single("image"), (req, res) => {
   if (req.file) {
     logo = req.file.path;
   }
+
+  let proof1 = "";
   let answers = 0;
   let proofed = 0;
 
@@ -68,6 +70,11 @@ router.post("/", parser.single("image"), (req, res) => {
   if (ecological1.length > 0) {
     answers += 1;
     console.log("answers", answers);
+  }
+
+  if (proof1.length > 0) {
+    proofed += 1;
+    console.log("proofed", proofed);
   }
 
   // // to do: error messages  for email does not match
@@ -102,6 +109,7 @@ router.post("/", parser.single("image"), (req, res) => {
       ecological1,
       economic1,
       answers,
+      proofed,
       owner: req.session.user._id,
     }).then((createdCompany) => {
       res.redirect("/");

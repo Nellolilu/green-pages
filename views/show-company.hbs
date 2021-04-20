@@ -11,10 +11,27 @@
 <p>{{description}}</p>
 <img src="{{this.logo}}" alt="this.name">
 <p>FIRST ASSUMPTION {{social1}}</p>
+
+{{!-- WHY DOES IT NEED TO BE OUTSIDE OF THE WITH? --}}
+
+{{!-- {{#if isOwner}} --}}
+<img src="{{this.proof1}}" alt="this.name">
+
+<a href="/proof/{{this._id}}/1">proof it!</a>
+{{!-- {{/if}} --}}
+
+
 <p>SECOND ASSUMPTION {{ecological1}}</p>
+
+<img src="{{this.proof2}}" alt="this.name">
+
+<a href="/proof/{{this._id}}/2">proof it!</a>
 <p>THIRD ASSUMPTION{{economic1}}</p>
 
+
+
 <a href="/show/{{this._id}}/edit-company">Edit</a>
+
 
 {{#if doesNotRememberYet}}
 <a href="/show/{{_id}}/remember">remember this</a>
@@ -23,13 +40,13 @@
 {{#if forgetAbout}}
 <a href="/show/{{_id}}/leave">forget about</a>
 {{/if}}
-
-
-
 <br>
 <br>
 {{/with}}
 
+
+
+<br>
 
 
 <a href="/">Go Home</a>

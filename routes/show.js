@@ -11,10 +11,22 @@ const router = require("express").Router();
 
 router.get("/:mufasa", (req, res) => {
   console.log("req.params", req.params.mufasa);
-  Company.findById(req.params.mufasa).then((thisCompany) => {
-    console.log("this is the company", thisCompany);
-    res.render("show-company", { thisCompany });
-  });
+  Company.findById(req.params.mufasa)
+    .populate("owner")
+    .then((thisCompany) => {
+      console.log(thisCompany);
+      console.log(req.session.user);
+      let isOwner = false;
+      if (req.session.user) {
+        if (thisCompany.owner.email === req.session.user.email) {
+          isOwner = true;
+        }
+      }
+
+      console.log("this is the company", thisCompany);
+      console.log("this is the owner", isOwner);
+      res.render("show-company", { isOwner, thisCompany });
+    });
 });
 
 // THE ROUTER BELONGS INTO PROFILE ROUTE

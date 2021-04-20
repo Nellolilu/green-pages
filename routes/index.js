@@ -15,10 +15,14 @@ router.get("/", (req, res, next) => {
   res.render("index");
 });
 
+// FILTER OPTIONS
 router.get("/search-result", (req, res) => {
   const companyName = new RegExp(req.query.company, "i");
   Company.find({ name: { $regex: companyName } }).then((allCompanies) => {
     console.log("allCompanies", allCompanies);
+
+    // allCompanysforEach() let proofed=0; if(proof1.length >0){proofed +=1} /  change hbs
+
     res.render("search-result", { companiesList: allCompanies });
   });
 });

@@ -52,6 +52,17 @@ const companySchema = new Schema({
     max: 100,
   },
 
+  proof1: {
+    trype: String,
+  },
+
+  proof2: {
+    trype: String,
+  },
+  proof3: {
+    trype: String,
+  },
+
   ecological1: {
     type: String,
     max: 100,
@@ -63,7 +74,7 @@ const companySchema = new Schema({
   },
 
   answers: { type: Number, default: 0 },
-  // proofed: { type: Number, default: 0 },
+  proofed: { type: Number, default: 5 },
   // coworker: [{ type: mongoose.Schema.Types.ObjectId, ref: "Company" }],
 
   owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },

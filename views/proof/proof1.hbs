@@ -1,0 +1,20 @@
+<h1>Proof</h1>
+
+{{#with thisCompany}}
+
+<form method="POST" action="/proof/{{_id}}/1" enctype="multipart/form-data">
+<h4>SOCIAL QUESTION 1</h4>
+  <input type= "file" name="proof1">
+ 
+  <button type="submit">Upload</button>
+</form>
+
+
+
+<a href="/">Go Home</a>
+
+{{/with}}
+
+{{#if errorMessage}}
+<h4 style="color: red;">{{errorMessage}}</h4>
+{{/if}}
