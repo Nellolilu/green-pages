@@ -2,10 +2,11 @@ const Company = require("../models/Company.model");
 const SIZE_ENUM = require("../utils/size-enum");
 const BRANCH_ENUM = require("../utils/branch-enum");
 const createCompanyValidation = require("../utils/create-company-validation");
-// const isLoggedMiddleware = require("../middlewares/isLoggedIn");
+const isLoggedMiddleware = require("../middlewares/isLoggedIn");
 // const shouldNotBeLoggedIn = require("../middlewares/shouldNotBeLoggedIn");
 const parser = require("../config/cloudinary");
 const User = require("../models/User.model");
+const isLoggedIn = require("../middlewares/isLoggedIn");
 
 const router = require("express").Router();
 
@@ -22,7 +23,6 @@ router.get("/:mufasa", (req, res) => {
           isOwner = true;
         }
       }
-
       console.log("this is the company", thisCompany);
       console.log("this is the owner", isOwner);
       res.render("show-company", { isOwner, thisCompany });
@@ -30,10 +30,8 @@ router.get("/:mufasa", (req, res) => {
 });
 
 // THE ROUTER BELONGS INTO PROFILE ROUTE
-// FIRST AUTH; THEN FINISH
 
-// // NEED A PARAMS FOR ID CHECK
-router.get("/:mufasa/edit-company", (req, res) => {
+router.get("/:mufasa/edit-company", isLoggedMiddleware, (req, res) => {
   Company.findById(req.params.mufasa)
     .populate("owner")
     .then((thisCompany) => {
@@ -55,7 +53,7 @@ router.get("/:mufasa/edit-company", (req, res) => {
           ),
         });
       } else {
-        res.redirect("/");
+        res.redirect("/show", { thisCompany, isOwner });
       }
     })
     .catch((err) => {
@@ -65,89 +63,94 @@ router.get("/:mufasa/edit-company", (req, res) => {
     });
 });
 
-router.post("/:mufasa/edit-company", parser.single("logo"), (req, res) => {
-  const {
-    name,
-    url,
-    email,
-    adress,
-    size,
-    branch,
-    description,
-    social1,
-    ecological1,
-    economic1,
-    answers,
-  } = req.body;
+router.post(
+  "/:mufasa/edit-company",
+  isLoggedMiddleware,
+  parser.single("logo"),
+  (req, res) => {
+    const {
+      name,
+      url,
+      email,
+      adress,
+      size,
+      branch,
+      description,
+      social1,
+      ecological1,
+      economic1,
+      answers,
+    } = req.body;
 
-  console.log(req.body);
+    console.log(req.body);
 
-  Company.findById(req.params.mufasa)
-    .populate("owner")
-    .then((thisCompany) => {
-      // OWNERSHIP
-      let isOwner = false;
-      if (req.session.user) {
-        if (thisCompany.owner.email === req.session.user.email) {
-          isOwner = true;
-        }
-      }
-
-      if (isOwner) {
-        let answers = 0;
-
-        const updater = {
-          name,
-          url,
-          email,
-          adress,
-          size,
-          branch,
-          description,
-          social1,
-          ecological1,
-          economic1,
-          answers,
-        };
-
-        console.log("this is the updater", updater);
-
-        if (req.file) {
-          updater.logo = req.file.path;
+    Company.findById(req.params.mufasa)
+      .populate("owner")
+      .then((thisCompany) => {
+        // OWNERSHIP
+        let isOwner = false;
+        if (req.session.user) {
+          if (thisCompany.owner.email === req.session.user.email) {
+            isOwner = true;
+          }
         }
 
-        if (updater.social1.length > 0) {
-          updater.answers += 1;
-          console.log("answers", answers);
-        }
-        if (updater.economic1.length > 0) {
-          updater.answers += 1;
-          console.log("answers", answers);
-        }
-        if (updater.ecological1.length > 0) {
-          updater.answers += 1;
-          console.log("answers", answers);
-        }
+        if (isOwner) {
+          let answers = 0;
 
-        // UPDATE
-        Company.findByIdAndUpdate(req.params.mufasa, updater, {
-          new: true,
-        }).then((newCompany) => {
-          console.log("newCompany", newCompany);
-          res.redirect("/search-result");
-        });
+          const updater = {
+            name,
+            url,
+            email,
+            adress,
+            size,
+            branch,
+            description,
+            social1,
+            ecological1,
+            economic1,
+            answers,
+          };
 
-        // IF NOT OWNER
-      } else {
+          console.log("this is the updater", updater);
+
+          if (req.file) {
+            updater.logo = req.file.path;
+          }
+
+          if (updater.social1.length > 0) {
+            updater.answers += 1;
+            console.log("answers", answers);
+          }
+          if (updater.economic1.length > 0) {
+            updater.answers += 1;
+            console.log("answers", answers);
+          }
+          if (updater.ecological1.length > 0) {
+            updater.answers += 1;
+            console.log("answers", answers);
+          }
+
+          // UPDATE
+          Company.findByIdAndUpdate(req.params.mufasa, updater, {
+            new: true,
+          }).then((newCompany) => {
+            console.log("newCompany", newCompany);
+            res.redirect("/show", { thisCompany: newCompany });
+          });
+
+          // IF NOT OWNER
+        } else {
+          res.redirect("/show", { thisCompany });
+        }
+      })
+      .catch((err) => {
+        console.log("err:", err);
+        console.log("DOESNT EXIST ?! - GO HOME AND TRY AGAIN");
         res.redirect("/");
-      }
-    })
-    .catch((err) => {
-      console.log("err:", err);
-      console.log("DOESNT EXIST ?! - GO HOME AND TRY AGAIN");
-      res.redirect("/");
-    });
-});
+      });
+  }
+);
 
 // *********** is logged middelware needs here, need check if already existing in coworker
 // THIS VERSION WORKS LIKE A PERSONAL WISHLIST

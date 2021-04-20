@@ -1,5 +1,7 @@
 // CHECK OR SKIP
 
+// HELP: HOW CAN I CHECK FOR AN #IF INSIDE A #WITH
+
 // check Middelwares / authorities
 // delete pictureproofes
 // count proofes
@@ -23,7 +25,7 @@ const shouldNotBeLoggedIn = require("../middlewares/shouldNotBeLoggedIn");
 const parser = require("../config/cloudinary");
 const router = express.Router();
 
-router.get("/", (req, res) => {
+router.get("/", isLoggedMiddleware, (req, res) => {
   console.log("user:", req.session.user);
   res.render("create-company", {
     branch: BRANCH_ENUM,
@@ -31,7 +33,7 @@ router.get("/", (req, res) => {
   });
 });
 
-router.post("/", parser.single("image"), (req, res) => {
+router.post("/", isLoggedMiddleware, parser.single("image"), (req, res) => {
   console.log("req.file:", req.file);
   console.log("req.files:", req.files);
 
