@@ -19,9 +19,20 @@ router.get("/", (req, res, next) => {
 router.get("/search-result", (req, res) => {
   const companyName = new RegExp(req.query.company, "i");
   Company.find({ name: { $regex: companyName } }).then((allCompanies) => {
-    console.log("allCompanies", allCompanies);
+    console.log("allCompanies[0]", allCompanies[0]);
+    console.log("spread allCompanies[0]", { ...allCompanies[0].toJSON() });
+    const proofArray = allCompanies.map((element) => {
+      let proofed = 0;
+      if (element.proof1) {
+        proofed += 1;
+      }
+      if (element.proof2) {
+        proofed += 1;
+      }
+      return { ...element.toJSON(), proofed };
+    });
 
-    // allCompanysforEach() let proofed=0; if(proof1.length >0){proofed +=1} /  change hbs
+    console.log("AFTER THE MAP: ", proofArray);
 
     res.render("search-result", { companiesList: allCompanies });
   });

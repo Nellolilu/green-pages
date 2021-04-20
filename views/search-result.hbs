@@ -1,29 +1,43 @@
-<h4>THIS IS THE SURCH RESULT</h4>
+<section class="header">
+<div class="logo">
+<h1>glass<br>org</h1>
+</div>
+<ul class="buttons-left">
+    <li><a href="/create-company" class="list">list your company</a></li>
+    <li><a href="/auth/login" class="user">(:>)</a></li>
+    <li><a href="/" class="door">>]]</a></li>
+</ul>
+{{!-- /* if not loged in signup, if logged in profile*/ change logge out direction--}}
+</section>
+
+
+<section class="results">
 
 {{#if companiesList}}
+<h4>found:</h4>
+<ul class="filter">
+<li><h4>filter by branch:</h4></li>  
+  <li><a href="/branch=service">Service</a></li>
+  <li><a href="/branch=sales">Sales</a></li>
+  <li><a href="/branch=production">Production</a></li>
+  <li><a href="/branch=other">Everything else</a></li>
+</ul>
 
-<h1>THIS ARE ALL COMPANIES</h1>
 
-<h4>filter by branch</h4>
-<a href="/branch=service">Service</a>
-<a href="/branch=sales">Sales</a>
-<a href="/branch=production">Production</a>
-<a href="/branch=other">Everything else</a>
-
-
-
+<section id="multi-results">
+<article class="one-result">
 {{#each companiesList}}
 <h4>{{this.name}}</h4>
 <p>{{this.adress}}</p>
 <p>{{this.url}}</p>
 <p>answered: {{this.answers}}</p>
 <p>proofed: {{this.proofed}}</p>
-
 <a href="/show/{{this._id}}"> show all <br> </a>
-
 {{/each}}
+</article>
+</section>
 
-
+</section>
 
 
 {{else}}

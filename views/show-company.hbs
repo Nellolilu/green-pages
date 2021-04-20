@@ -14,18 +14,23 @@
 
 {{!-- WHY DOES IT NEED TO BE OUTSIDE OF THE WITH? --}}
 
-{{!-- {{#if isOwner}} --}}
+{{#if ../isOwner}}
 <img src="{{this.proof1}}" alt="this.name">
 
 <a href="/proof/{{this._id}}/1">proof it!</a>
-{{!-- {{/if}} --}}
+{{/if}}
 
 
 <p>SECOND ASSUMPTION {{ecological1}}</p>
 
+
+{{#if ../isOwner}}
 <img src="{{this.proof2}}" alt="this.name">
 
 <a href="/proof/{{this._id}}/2">proof it!</a>
+
+{{/if}}
+
 <p>THIRD ASSUMPTION{{economic1}}</p>
 
 

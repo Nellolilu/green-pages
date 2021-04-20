@@ -152,6 +152,7 @@ router.post(
   }
 );
 
+// nned also middelware & check on the pictureproof
 // *********** is logged middelware needs here, need check if already existing in coworker
 // THIS VERSION WORKS LIKE A PERSONAL WISHLIST
 router.get("/:mufasa/remember", (req, res) => {
@@ -202,7 +203,7 @@ router.get("/:mufasa/remember", (req, res) => {
   });
 });
 
-router.get("/:mufasa/delete", (req, res) => {
+router.get("/:mufasa/delete", isLoggedMiddleware, (req, res) => {
   Company.findById(req.params.mufasa)
     .populate("owner")
     .then((thisCompany) => {

@@ -1,31 +1,32 @@
-<h1>APPS NAME</h1>
-<p>This is the Homepage</p>
 
-<br>
-<a href="/create-company">List your company</a>
-<br>
-<br>
-<a href="/profile">Profile</a>
+<section class="header">
+<div class="logo">
+<h1>glass<br>org</h1>
+</div>
+<ul class="buttons-left">
+    <li><a href="/create-company" class="list">list your company</a></li>
+    <li><a href="/auth/login" class="user">(:>)</a></li>
+    <li><a href="/" class="door">>]]</a></li>
+</ul>
+{{!-- /* if not loged in signup, if logged in profile*/ change logge out direction--}}
+</section>
 
+<section id="textbody">
+<p class="text">Corporate transparency is not just a movement - in the digital age transparency is a strong weapon. It leads to a more egalitarian and connected world and to more efficiency and trustworthy companies.
+<br>Show your approach in beeing a substainable thinking company and give your competetors the chance to join you in doing the right thing - for a better social, ecological and economical future.
+</p>
+<p class="claim">Its time to share and profit - for everyone.</p>
+</section>
 
-
-<br>
-<p>THIS IS TO DECIDE / TO HIDE</p>
-<a href="/auth/signup">signup</a>
-<a href="/auth/login">login</a>
-<br>
-
-<p>THIS IS THE IDEA EXPLAINED ABOUT TRANSPARENCY GREENWASHING <br> AND NEXT LEVEL COMPETIONS ON THE MARKET TO CONVINCE SCEPTICALS AND WIN ECOS </p>
-
-
-
+<section id="search">
 <form action="/search-result">
-  <input name="company" placeholder="search" required>
-  <button type="submit">find</button>
+<input class="search-input" name="company" placeholder="search" required>
+<a href="javascript:;" onclick="parentNode.submit();">find</a>
+
 <a href="/search-result">show all</a>
 </form>
+</section>
 
 
 
-<br>
-<button type="redirect">Log out</button>
+{{!-- <button type="redirect">Log out</button> --}}
