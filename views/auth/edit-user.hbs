@@ -3,22 +3,17 @@
 
 {{#with user}}
 
-<form method="POST" action="/auth/{{_id}}/edit-user" >
+<form method="POST" action="/auth/edit-user" >
    <label> Name
       <input placeholder= "Name" name="name" value="{{name}}">
    </label>
    <label> E-Mail Adress
       <input placeholder= "Email" name="email" value="{{email}}">      
    </label>
-   <label> Password
-      <input type="password" name="password">
-      <input placeholder= "Password" name="password" value="{{password}}">  
+   <label> New Password
+      <input placeholder= "Password" name="password">  
    </label>
-   <button type="toggle"><0></button>
-   <label> Password
-      <input placeholder= "Password" name="password" value="{{password}}"> 
-   </label>
-   <button type="toggle"><0></button>
+
    <button type="submit">Submit changes</button>
     <button type="delete">Delete</button>
    <button type="redirect">Go Back</button>

@@ -1,3 +1,6 @@
+//edit user needs to be updated, bright potato can help
+
+
 const router = require("express").Router();
 
 // ℹ️ Handles password encryption
@@ -22,11 +25,9 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
   const { name, email, password } = req.body;
 
   if (!email) {
-    return res
-      .status(400)
-      .render("auth/signup", {
-        errorMessage: "Please provide your E-Mail-Adress.",
-      });
+    return res.status(400).render("auth/signup", {
+      errorMessage: "Please provide your E-Mail-Adress.",
+    });
   }
 
   if (password.length < 8) {
@@ -100,11 +101,9 @@ router.post("/login", shouldNotBeLoggedIn, (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email) {
-    return res
-      .status(400)
-      .render("auth/login", {
-        errorMessage: "Please provide your e-mail-adress.",
-      });
+    return res.status(400).render("auth/login", {
+      errorMessage: "Please provide your e-mail-adress.",
+    });
   }
 
   // Here we use the same logic as above
@@ -157,21 +156,45 @@ router.get("/logout", isLoggedIn, (req, res) => {
   });
 });
 
-router.get("/:whatever/edit-user", isLoggedIn, (req, res) => {
-  User.findById(req.params.whatever)
-    .then((thisUser) => {
-      // CHECK User
-//      let isOwner = false;
-//        if (thisUser.user.email === req.session.user.email) {
-//          isOwner = true;
-//      }
-//      if (isOwner) {
+router.get("/edit-user", isLoggedIn, (req, res) => {
   res.render("auth/edit-user", {
-    user: thisUser })
-  // } else {
-  //   res.redirect("/");
-//  }
+    user: req.session.user,
+  });
 });
-});
+
+
+router.post ("/edit-user", (req, res) => {
+  const {
+    name,
+    email,
+    password
+  } = req.body;
+
+  console.log(req.body);
+
+  User.findById(req.session.user._id)
+    .then((thisUser) => {
+      const updatedUser = {
+        name,
+        email,
+        password
+      };
+
+      console.log("this is the updated user", updatedUser)
+
+      User.findByIdAndUpdate(req.session.user._id, updatedUser
+        ). then((newUser) => {
+        console.log("newUser", newUser);
+        res.redirect("/profile")
+      })
+    })
+  
+})
+
+
+
+
+
+
 
 module.exports = router;
