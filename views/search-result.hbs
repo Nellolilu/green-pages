@@ -11,36 +11,37 @@
 </section>
 
 
-<section class="results">
+<section id="body">
 
 {{#if companiesList}}
 <h4>found:</h4>
 <ul class="filter">
 <li><h4>filter by branch:</h4></li>  
-  <li><a href="/branch=service">Service</a></li>
-  <li><a href="/branch=sales">Sales</a></li>
-  <li><a href="/branch=production">Production</a></li>
-  <li><a href="/branch=other">Everything else</a></li>
+  <li><a href="/branch=service">service</a></li>
+  <li><a href="/branch=sales">sales</a></li>
+  <li><a href="/branch=production">production</a></li>
+  <li><a href="/branch=other">everything else</a></li>
 </ul>
 
-
-<section id="multi-results">
-<article class="one-result">
+<div class="results-flex">
 {{#each companiesList}}
+<article class="one-result">
 <h4>{{this.name}}</h4>
 <p>{{this.adress}}</p>
 <p>{{this.url}}</p>
 <p>answered: {{this.answers}}</p>
 <p>proofed: {{this.proofed}}</p>
-<a href="/show/{{this._id}}"> show all <br> </a>
-{{/each}}
+<div class="show-btn"><a href="/show/{{this._id}}">show all<br> </a></div>
 </article>
-</section>
+{{/each}}
+</div>
 
-</section>
+
+
 
 
 {{else}}
-<h1>THERE ARE NO COMPANIES LISTED</h1>
+<h4>no companies found</h4>
 <a href="/create-company">create one!</a>
 {{/if}}
+</section>
