@@ -1,37 +1,51 @@
-<h4>EDIT ONE COMPANY</h4>
+<section class="header">
+<div class="logo">
+  <a href="/"><h1>glass<br>org</h1></a>
+</div>
+<ul class="buttons-left">
+    <li><a href="/search-result" class="list">show companies</a></li>
+    <li><a href="/auth/login" class="user">(:>)</a></li>
+    <li><a href="/" class="door">>]]</a></li>
+</ul>
+{{!-- /* if not loged in signup, if logged in profile*/ change logge out direction--}}
+</section>
+
+<section id="body">
+<h4>edit this listing</h4>
+
+<section class="questionaire">
 
 {{#with company}}
 
 <form method="POST" action="/show/{{_id}}/edit-company" enctype="multipart/form-data">
-  <input placeholder= "Company Name" name="name" value="{{name}}">
-  <br>
-  <input placeholder= "Webpage" type="url" name="url" value="{{url}}">
-  <br>
-  <input placeholder= "Email" type="email" name="email" value="{{email}}">
-  <br>
-  <input placeholder= "Adress" name="adress" value="{{adress}}">
-  <br>
-  <br>
+  <input class="form-input" placeholder= "company Name" name="name" value="{{name}}">
+  <input class="form-input" placeholder= "webpage" type="url" name="url" value="{{url}}">
+  <input class="form-input" placeholder= "email" type="email" name="email" value="{{email}}">
+  <input class="form-input" placeholder= "adress" name="adress" value="{{adress}}">
 
-  <select name="branch" id="otherBranches" >
-    <option selected>{{branch}}</option>
-    {{#each ../otherBranches}}
-    <option value="{{this}}">{{this}}</option>
-    {{/each}}
-  </select> 
 
-  <select name="size" id="otherSizes" >
+ <select class="form-input" name="size" id="otherSizes" >
           <option selected>{{size}}</option>
     {{#each ../otherSizes}}
     <option value="{{this}}">{{this}}</option>
     {{/each}}
   </select>
 
-  <input placeholder= "Description" name="description" value="{{description}}">
+  <select class="form-input" name="branch" id="otherBranches" >
+    <option selected>{{branch}}</option>
+    {{#each ../otherBranches}}
+    <option value="{{this}}">{{this}}</option>
+    {{/each}}
+  </select> 
+  <input class="form-input" placeholder= "describe your company" name="description" value="{{description}}">
+ 
   <br>
-  <input type="file" name="logo">
-  <br>
-  <h5>Are you Sustainable?</h5>
+<label for="file-upload" class="file-upload">
+    upload a logo
+</label>
+<input id="file-upload" type="file" name="logo"/>
+
+  {{!-- <h5>Are you Sustainable?</h5>
   <p>Social: Question 1</p>
   <input placeholder= "Assumption 1" name="social1" value="{{social1}}">
   <br>
@@ -40,21 +54,31 @@
   <br>
   <p>Economic: Question 3</p>
   <input placeholder= "Assumption 1" name="economic1" value="{{economic1}}">
-  <br>
-  <button type="submit">send changes</button>
+  <br> --}}
+
+<h4>and go transparent</h4>
+<h6 class="description">Fill out this questionaire and share your sustainablilty approaches.<br>To make your profile trustworthy, you can upload pictures that proof<br>your statements after you succesfully listed your company.</h6>
+  <p>Do you have more male or more female positions in leading roles of your business?</p>
+  <input class="form-input" placeholder= "male / female" name="social1" value="{{social1}}">
+<p>Do you pay taxes on your product/service where your costumer is based?</p>
+  <input class="form-input" placeholder= "yes / no / some %" name="ecological1" value="{{ecological1}}">
+  <p>Is your company running completely on renewable energy?</p>
+  <input class="form-input" placeholder= "yes / no / some %" name="economic1" value="{{economic1}}">
+    {{!-- <p>What percentage of the CO2 your buisness is producting are you compensating?</p>
+  <input class="form-input" placeholder= "some %" name="economic2" value="{{economic2}}"> --}}
+<br>
+<a class="create-btn" href="javascript:;" onclick="parentNode.submit();">save changes</a>
 </form>
 
 
-<a href="/show/{{_id}}/delete">DELETE THIS LISTING</a>
-
-<a href="/">Go Home</a>
+<a class="home-btn" style="color: gray;" href="/show/{{_id}}/delete">delete this listing</a>
+<br>
+<a class="home-btn" href="/">go home</a>
 {{/with}}
 
-
-
-
+</section>
 
 {{#if errorMessage}}
-<h4 style="color: red;">{{errorMessage}}</h4>
+<h4 class="err" >{{errorMessage}}</h4>
 {{/if}}
-
+</section>

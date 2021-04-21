@@ -50,6 +50,7 @@ const companySchema = new Schema({
   social1: {
     type: String,
     max: 100,
+    default: "no comment",
   },
 
   proof1: {
@@ -66,11 +67,13 @@ const companySchema = new Schema({
   ecological1: {
     type: String,
     max: 100,
+    default: "no comment",
   },
 
   economic1: {
     type: String,
     max: 100,
+    default: "no comment",
   },
 
   answers: { type: Number, default: 0 },

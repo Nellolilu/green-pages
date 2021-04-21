@@ -1,53 +1,65 @@
-<h1>CREATE NEW COMPANY</h1>
+<section class="header">
+<div class="logo">
+  <a href="/"><h1>glass<br>org</h1></a>
+</div>
+<ul class="buttons-left">
+    <li><a href="/search-result" class="list">show companies</a></li>
+    <li><a href="/auth/login" class="user">(:>)</a></li>
+    <li><a href="/" class="door">>]]</a></li>
+</ul>
+{{!-- /* if not loged in signup, if logged in profile*/ change logge out direction--}}
+</section>
 
+<section id="body">
+<h4>create a listing</h4>
 
+<section class="questionaire">
+<h4>of your company</h4>
 <form method="POST" action="/create-company" enctype="multipart/form-data">
-  <input placeholder= "Company Name" name="name" value="{{name}}">
-  <br>
-  <input placeholder= "Webpage" type="url" name="url" value="{{url}}">
-  <br>
-  <input placeholder= "Email" type="email" name="email" value="{{email}}">
-  <br>
-  <input placeholder= "Adress" name="adress" value="{{adress}}">
-  <br>
-    <select name="size" id="size" >
+  <input class="form-input" placeholder= "company Name" name="name" value="{{name}}">
+  <input class="form-input" placeholder= "webpage" type="url" name="url" value="{{url}}">
+  <input class="form-input" placeholder= "email" type="email" name="email" value="{{email}}">
+  <input class="form-input" placeholder= "adress" name="adress" value="{{adress}}">
+    <select class="form-input" name="size" id="size" >
     <option disabled selected>company size</option>
     {{#each size}}
     <option value="{{this}}">{{this}}</option>
     {{/each}}
   </select>
-  <br>
-    <select name="branch" id="branch" >
+    <select class="form-input" name="branch" id="branch" >
       <option disabled selected>branch</option>
     {{#each branch}}
     <option value="{{this}}">{{this}}</option>
     {{/each}}
   </select>
-  <br>
+  <input class="form-input" placeholder= "describe your company" name="description" value="{{description}}">
+  {{!-- <input class="form-input" type="file" name="image"> --}}
+<br>
+<label for="file-upload" class="file-upload">
+    upload a logo
+</label>
+<input id="file-upload" type="file" name="image"/>
 
-  <input placeholder= "Description" name="description" value="{{description}}">
-  <br>
-  <input type="file" name="image">
+<h4>and go transparent</h4>
+<h6 class="description">Fill out this questionaire and share your sustainablilty approaches.<br>To make your profile trustworthy, you can upload pictures that proof<br>your statements after you succesfully listed your company.</h6>
+  <p>Do you have more male or more female positions in leading roles of your business?</p>
+  <input class="form-input" placeholder= "male / female" name="social1" value="{{social1}}">
+<p>Do you pay taxes on your product/service where your costumer is based?</p>
+  <input class="form-input" placeholder= "yes / no / some %" name="ecological1" value="{{ecological1}}">
+  <p>Is your company running completely on renewable energy?</p>
+  <input class="form-input" placeholder= "yes / no / some %" name="economic1" value="{{economic1}}">
+    {{!-- <p>What percentage of the CO2 your buisness is producting are you compensating?</p>
+  <input class="form-input" placeholder= "some %" name="economic2" value="{{economic2}}"> --}}
+<br>
+<a class="create-btn" href="javascript:;" onclick="parentNode.submit();">create listing</a>
 
-  <br>
-  <h5>Are you Sustainable?</h5>
-  <p>Social: Question 1</p>
-  <input placeholder= "Assumption 1" name="social1" value="{{social1}}">
-  <br>
-      {{!-- <p>do you want to pictureproof?</p>
-  <input type= "file" name="proof-social1"> --}}
-  <br>
-<p>Ecological: Question 2</p>
-  <input placeholder= "Assumption 1" name="ecological1" value="{{ecological1}}">
-  <br>
-  <p>Economic: Question 3</p>
-  <input placeholder= "Assumption 1" name="economic1" value="{{economic1}}">
-  <br>
-  <button type="submit">Create Company</button>
 </form>
 
-<a href="/">Go Home</a>
+<a class="home-btn" href="/">go home</a>
+</section>
+
 
 {{#if errorMessage}}
-<h4 style="color: red;">{{errorMessage}}</h4>
+<h4 class="err" >{{errorMessage}}</h4>
 {{/if}}
+</section>

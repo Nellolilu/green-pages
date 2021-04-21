@@ -1,10 +1,26 @@
+<section class="header">
+<div class="logo">
+  <a href="/"><h1>glass<br>org</h1></a>
+</div>
+<ul class="buttons-left">
+    <li><a href="/search-result" class="list">show companies</a></li>
+    <li><a href="/auth/login" class="user">(:>)</a></li>
+    <li><a href="/" class="door">>]]</a></li>
+</ul>
+{{!-- /* if not loged in signup, if logged in profile*/ change logge out direction--}}
+</section>
+
+
+<section id="body">
+
+
 {{#with user}}
 
-<h5> Hi {{name}}!</h5>
+<h4> Hi {{name}}!</h4>
 
 <a href="/auth/edit-user">Edit</a>
 
-<h5> YOUR LISTINGS</h5>
+<h4> YOUR LISTINGS</h4>
 
 
 
@@ -19,3 +35,4 @@
 {{/if}}
 
 {{/with}}
+</section>

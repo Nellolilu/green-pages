@@ -136,12 +136,12 @@ router.post(
             new: true,
           }).then((newCompany) => {
             console.log("newCompany", newCompany);
-            res.redirect("/show", { thisCompany: newCompany });
+            res.render("show-company", { thisCompany: newCompany });
           });
 
           // IF NOT OWNER
         } else {
-          res.redirect("/show", { thisCompany });
+          res.render("show", { thisCompany });
         }
       })
       .catch((err) => {

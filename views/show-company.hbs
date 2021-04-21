@@ -1,57 +1,147 @@
-<h4>this is the company</h4>
+<section class="header">
+<div class="logo">
+  <a href="/"><h1>glass<br>org</h1></a>
 
+</div>
+<ul class="buttons-left">
+    <li><a href="/search-result" class="list">show companies</a></li>
+    <li><a href="/auth/login" class="user">(:>)</a></li>
+    <li><a href="/" class="door">>]]</a></li>
+</ul>
+{{!-- /* if not loged in signup, if logged in profile*/ change logge out direction--}}
+</section>
+
+<section id="body">
+
+
+<section class="show-company">
 
 {{#with thisCompany}}
-<p>{{name}}</p>
-<p>{{url}}</p>
+
+<article class="company-infos">
+<div class="company-head">
+<img src="{{this.logo}}" alt="this.name">
+<h2>{{name}}</h2>
+</div>
+<a href="{{url}}">{{url}}</a>
+
 <p>{{email}}</p>
 <p>{{adress}}</p>
-<p>COMPANYSIZE: {{size}}</p>
-<p>BRANCH: {{branch}}</p>
+<p>company size: {{size}}</p>
+<p>branch: {{branch}}</p>
 <p>{{description}}</p>
-<img src="{{this.logo}}" alt="this.name">
-<p>FIRST ASSUMPTION {{social1}}</p>
-
-{{!-- WHY DOES IT NEED TO BE OUTSIDE OF THE WITH? --}}
-
+<br>
 {{#if ../isOwner}}
-<img src="{{this.proof1}}" alt="this.name">
-
-<a href="/proof/{{this._id}}/1">proof it!</a>
+<a href="/show/{{_id}}/edit-company">edit listing</a>
 {{/if}}
 
-
-<p>SECOND ASSUMPTION {{ecological1}}</p>
-
-
-{{#if ../isOwner}}
-<img src="{{this.proof2}}" alt="this.name">
-
-<a href="/proof/{{this._id}}/2">proof it!</a>
-
-{{/if}}
-
-<p>THIRD ASSUMPTION{{economic1}}</p>
-
-
-
-<a href="/show/{{this._id}}/edit-company">Edit</a>
-
-
-{{#if doesNotRememberYet}}
+<br>
+{{#if ../doesNotRememberYet}}
 <a href="/show/{{_id}}/remember">remember this</a>
 {{/if}} 
 
-{{#if forgetAbout}}
+{{#if ../forgetAbout}}
 <a href="/show/{{_id}}/leave">forget about</a>
 {{/if}}
 <br>
 <br>
+</article>
+
+
+<article class="answer-container">
+<div class="answers">
+
+<h2>...answered the following questions</h2>
+<h6>Do you have more male or more female positions in leading roles of your business?</p>
+
+<div class="proof-container">
+
+<p>{{social1}}<p/> 
+{{#if ../isOwner}}
+{{#unless this.proof1}}
+<a href="/proof/{{this._id}}/1">proof it!</a>
+{{/unless}}
+{{/if}}
+
+
+{{#if this.proof1}}
+{{#unless ../isOwner}}
+<a href="{{this.proof1}}">show proof</a>
+{{/unless}}
+{{/if}}
+
+
+
+{{#if this.proof1}}
+{{#if ../isOwner}}
+<a href="/proof/{{this._id}}/1">proofed</a>
+{{/if}}
+{{/if}}
+
+</div>
+
+</div>
+
+
+<div class="answers">
+<h6>Do you pay taxes on your product/service where your costumer is based?</h6>
+
+<div class="proof-container">
+
+<p>{{ecological1}}<p/> 
+{{#if ../isOwner}}
+{{#unless this.proof2}}
+<a href="/proof/{{this._id}}/2">proof it!</a>
+{{/unless}}
+{{/if}}
+
+
+{{#if this.proof2}}
+{{#unless ../isOwner}}
+<a href="{{this.proof2}}">show proof</a>
+{{/unless}}
+{{/if}}
+
+
+
+{{#if this.proof2}}
+{{#if ../isOwner}}
+<a href="/proof/{{this._id}}/2">proofed</a>
+{{/if}}
+{{/if}}
+
+</div>
+</div>
+
+<div class="answers">
+<h6>Is your company running completely on renewable energy?</h6>
+
+{{!-- <div class="proof-container">
+
+<p>{{economic1}}<p/> 
+{{#if ../isOwner}}
+<a href="/proof/{{this._id}}/3">proof it!</a>
+{{/if}}
+
+
+{{#if this.proof3}}
+{{#unless ../isOwner}}
+<a href="{{this.proof3}}">show proof</a>
+{{/unless}}
+{{/if}} --}}
+
+
+</div>
+
+{{!-- <div class="answers">4</div> --}}
+
+</div>
+
+
+</article>
+
 {{/with}}
 
+</section>
+</section>
 
-
-<br>
-
-
-<a href="/">Go Home</a>
