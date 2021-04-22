@@ -7,7 +7,7 @@
     <li><a href="/auth/login" class="user">(:>)</a></li>
     <li><a href="/" class="door">>]]</a></li>
 </ul>
-{{!-- /* if not loged in signup, if logged in profile*/ change logge out direction--}}
+{{!-- /* if not logged in signup, if logged in profile*/ change logge out direction--}}
 </section>
 
 
@@ -24,12 +24,20 @@
 
 
 
-{{#if listings}}
-{{#each listings}}
+
+<div class="results-flex"></div>
+{{#if ../ownersCompanies}}
+{{#each ../ownersCompanies}}
 <a>
   <p>{{this.name}}</p>
+  <p>{{this.adress}}</p>
+  <p>{{this.url}}</p>
+  <p>answered: {{this.answers}}</p>
+  <p>proofed: {{this.proofed}}</p>
+  <div class="show-btn"><a href="/show/{{this._id}}">show more<br> </a></div>
 </a>
 {{/each}}
+</div>
 {{else}}
 <p> No listings created.</p>
 {{/if}}

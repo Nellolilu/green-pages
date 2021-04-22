@@ -34,7 +34,7 @@
 
 <input class="form-input" placeholder= "name" name="name" value="{{name}}">
 <input class="form-input" placeholder= "email" type="email" name="email" value="{{email}}">
-<input class="form-input" placeholder= "password" type="password" name="password" value="{{password}}">
+<input class="form-input" placeholder= "new password" type="password" name="password">
 
 <br>
 <a class="create-btn" href="javascript:;" onclick="parentNode.submit();">send changes</a>
@@ -43,6 +43,8 @@
 </form>
 <br>
 <a class="home-btn" href="/">go home</a>
+<a class="home-btn" style="color: gray;" 
+href="/auth/delete">delete this user</a>
 
 {{/with}}
 
