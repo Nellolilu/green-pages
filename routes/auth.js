@@ -136,6 +136,7 @@ router.get("/logout", isLoggedIn, (req, res) => {
         .status(500)
         .render("auth/logout", { errorMessage: err.message });
     }
+    res.clearCookie("connect.sid");
     res.redirect("/");
   });
 });
@@ -151,22 +152,25 @@ router.post("/edit-user", (req, res) => {
 
   console.log(req.body);
 
-  User.findById(req.session.user._id).then((thisUser) => {
-    const updatedUser = {
-      name,
-      email,
-      password,
-    };
-
-    console.log("this is the updated user", updatedUser);
-
-    User.findByIdAndUpdate(req.session.user._id, updatedUser).then(
-      (newUser) => {
+    User.findByIdAndUpdate(
+      req.session.user._id, 
+      { name, email, password },
+      {new: true})
+      .then((newUser) => {
+      
         console.log("newUser", newUser);
+        req.session.user = newUser;
         res.redirect("/profile");
       }
     );
-  });
 });
+
+
+router.get("/delete", isLoggedIn, (req, res) => {
+  User.findByIdAndDelete(req.session.user._id)
+  .then(() => {
+    res.redirect("/");
+  });
+})
 
 module.exports = router;
