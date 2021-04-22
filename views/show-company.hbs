@@ -56,31 +56,113 @@
 
 <div class="proof-container">
 
+{{#if social1}}
 <p>{{social1}}<p/> 
+{{else}}
+<p>no comment<p/> 
+{{/if}}
+
 {{#if ../isOwner}}
 {{#unless this.proof1}}
-<a href="/proof/{{this._id}}/1">proof it!</a>
+<a href="/proof/{{this._id}}/1">prove it!</a>
 {{/unless}}
 {{/if}}
 
 
 {{#if this.proof1}}
 {{#unless ../isOwner}}
-<a href="{{this.proof1}}" target="_blank">show proof</a>
+<a href="{{this.proof1}}" target="_blank">show prove</a>
+{{/unless}}
+{{/if}}
+
+
+{{#if this.proof1}}
+{{#if ../isOwner}}
+<a href="{{this.proof1}}" target="_blank">proved</a>
+<a href="/proof/{{this._id}}/1">change picture</a>
+{{/if}}
+{{/if}}
+
+</div>
+
+</div>
+
+
+<div class="answers">
+<h6>Do you pay taxes on your product/service where your costumer is based?</h6>
+
+<div class="proof-container">
+
+
+{{#if economic1}}
+<p>{{economic1}}<p/> {{else}}
+<p>no comment<p/> 
+{{/if}}
+
+
+{{#if ../isOwner}}
+{{#unless this.proof2}}
+<a href="/proof/{{_id}}/2">prove it!</a>
+{{/unless}}
+{{/if}}
+
+
+{{#if this.proof2}}
+{{#unless ../isOwner}}
+<a href="{{this.proof2}}" target="_blank">show prove</a>
 {{/unless}}
 {{/if}}
 
 
 
-{{#if this.proof1}}
+{{#if this.proof2}}
 {{#if ../isOwner}}
-<a href="/proof/{{this._id}}/1">proofed</a>
+<a href="{{this.proof2}}" target="_blank">proved</a>
+<a href="/proof/{{this._id}}/2">change picture</a>
 {{/if}}
 {{/if}}
 
 </div>
+</div>
+
+<div class="answers">
+<h6>Is your company running completely on renewable energy?</h6>
+
+<div class="proof-container">
+
+
+{{#if ecological1}}
+<p>{{ecological1}}<p/> 
+{{else}}
+<p>no comment<p/> 
+{{/if}}
+
+{{#if ../isOwner}}
+{{#unless this.proof3}}
+<a href="/proof/{{_id}}/3">prove it!</a>
+{{/unless}}
+{{/if}}
+
+
+{{#if this.proof3}}
+{{#unless ../isOwner}}
+<a href="{{this.proof3}}" target="_blank">show prove</a>
+{{/unless}}
+{{/if}}
+
+
+
+{{#if this.proof3}}
+{{#if ../isOwner}}
+<a href="{{this.proof3}}" target="_blank">proved</a>
+<a href="/proof/{{this._id}}/3">change picture</a>
+
+{{/if}}
+{{/if}}
 
 </div>
+</div>
+
 
 
 <div class="answers">
@@ -88,79 +170,23 @@
 
 <div class="proof-container">
 
+
+{{#if ecological2}}
 <p>{{ecological2}}<p/> 
-{{#if ../isOwner}}
-{{#unless this.proof2}}
-<a href="/proof/{{this._id}}/2">proof it!</a>
-{{/unless}}
+{{else}}
+<p>no comment<p/> 
 {{/if}}
 
-
-{{#if this.proof2}}
-{{#unless ../isOwner}}
-<a href="{{this.proof2}}" target="_blank">show proof</a>
-{{/unless}}
-{{/if}}
-
-
-
-{{#if this.proof2}}
-{{#if ../isOwner}}
-<a href="/proof/{{this._id}} /2">proofed</a>
-{{/if}}
-{{/if}}
-
-</div>
-</div>
-
-<div class="answers">
-<h6>Is your company running completely on renewable energy?</h6>
-
-<div class="proof-container">
-
-<p>{{ecological1}}<p/> 
-{{#if ../isOwner}}
-{{#unless this.proof3}}
-<a href="/proof/{{this._id}}/3">proof it!</a>
-{{/unless}}
-{{/if}}
-
-
-{{#if this.proof3}}
-{{#unless ../isOwner}}
-<a href="{{this.proof3}}" target="_blank">show proof</a>
-{{/unless}}
-{{/if}}
-
-
-
-{{#if this.proof3}}
-{{#if ../isOwner}}
-<a href="/proof/{{this._id}}/3">proofed</a>
-{{/if}}
-{{/if}}
-
-</div>
-</div>
-
-
-
-<div class="answers">
-<h6>Is your company running completely on renewable energy?</h6>
-
-<div class="proof-container">
-
-<p>{{ecological1}}<p/> 
 {{#if ../isOwner}}
 {{#unless this.proof4}}
-<a href="/proof/{{this._id}}/4">proof it!</a>
+<a href="/proof/{{this._id}}/4">prove it!</a>
 {{/unless}}
 {{/if}}
 
 
 {{#if this.proof4}}
 {{#unless ../isOwner}}
-<a href="{{this.proof4}}" target="_blank">show proof</a>
+<a href="{{this.proof4}}" target="_blank">show prove</a>
 {{/unless}}
 {{/if}}
 
@@ -168,7 +194,8 @@
 
 {{#if this.proof4}}
 {{#if ../isOwner}}
-<a href="/proof/{{this._id}}/4">proofed</a>
+<a href="{{this.proof4}}" target="_blank">proved</a>
+<a href="/proof/{{this._id}}/4">change picture</a>
 {{/if}}
 {{/if}}
 

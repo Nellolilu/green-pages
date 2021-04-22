@@ -51,7 +51,8 @@ router.post("/:mufasa/1", parser.single("proof1"), (req, res) => {
           { new: true }
         ).then((newCompany) => {
           console.log("newCompany", newCompany);
-          res.render("show-company", { isOwner, thisCompany: newCompany });
+          // res.render("show-company", { isOwner, thisCompany: newCompany });
+          res.redirect(`/show/${newCompany._id}`);
         });
       } else {
         res.redirect("/");
@@ -59,7 +60,7 @@ router.post("/:mufasa/1", parser.single("proof1"), (req, res) => {
     });
 });
 
-router.get("/:mufasa/1", (req, res) => {
+router.get("/:mufasa/2", (req, res) => {
   Company.findById(req.params.mufasa)
     .populate("owner")
     .then((thisCompany) => {
@@ -72,7 +73,7 @@ router.get("/:mufasa/1", (req, res) => {
         }
       }
       if (isOwner) {
-        res.render("proof/proof1", { thisCompany });
+        res.render("proof/proof2", { thisCompany });
       } else {
         res.redirect("/");
       }
@@ -104,7 +105,7 @@ router.post("/:mufasa/2", parser.single("proof2"), (req, res) => {
           { new: true }
         ).then((newCompany) => {
           console.log("newCompany", newCompany);
-          res.render("show-company", { isOwner, thisCompany: newCompany });
+          res.redirect(`/show/${newCompany._id}`);
         });
       } else {
         res.redirect("/");
@@ -149,6 +150,7 @@ router.post("/:mufasa/3", parser.single("proof3"), (req, res) => {
         let proof3;
         if (req.file) {
           proof3 = req.file.path;
+          console.log("re.file.path", req.file.path);
         }
 
         Company.findByIdAndUpdate(
@@ -157,7 +159,7 @@ router.post("/:mufasa/3", parser.single("proof3"), (req, res) => {
           { new: true }
         ).then((newCompany) => {
           console.log("newCompany", newCompany);
-          res.render("show-company", { isOwner, thisCompany: newCompany });
+          res.redirect(`/show/${newCompany._id}`);
         });
       } else {
         res.redirect("/");
@@ -210,7 +212,7 @@ router.post("/:mufasa/4", parser.single("proof4"), (req, res) => {
           { new: true }
         ).then((newCompany) => {
           console.log("newCompany", newCompany);
-          res.render("show-company", { isOwner, thisCompany: newCompany });
+          res.redirect(`/show/${newCompany._id}`);
         });
       } else {
         res.redirect("/");

@@ -1,19 +1,3 @@
-// CHECK OR SKIP
-
-// HELP: HOW CAN I CHECK FOR AN #IF INSIDE A #WITH
-
-// check Middelwares / authorities
-// delete pictureproofes
-// count proofes
-// THE ANSWERS COUNT IS NOT STABIL TO MANUAL CHANGES IN DATABASE
-// no ID CHECK WITH COMPANY URL
-// create a wishlist for the profile (already existing)
-// slugify would be nice
-
-// ******** USEFUL LATER
-// const isLoggedMiddleware = require("../middlewares/MustBeLoggedIn");
-// const slugify = require("slugify");
-
 const express = require("express");
 const SIZE_ENUM = require("../utils/size-enum");
 const BRANCH_ENUM = require("../utils/branch-enum");
@@ -42,9 +26,7 @@ router.post("/", isLoggedMiddleware, parser.single("image"), (req, res) => {
     logo = req.file.path;
   }
 
-  let proof1 = "";
   let answers = 0;
-  let proofed = 0;
 
   const {
     name,
@@ -64,24 +46,15 @@ router.post("/", isLoggedMiddleware, parser.single("image"), (req, res) => {
 
   if (social1.length > 0) {
     answers += 1;
-    console.log("answers", answers);
   }
   if (economic1.length > 0) {
     answers += 1;
-    console.log("answers", answers);
   }
   if (ecological1.length > 0) {
     answers += 1;
-    console.log("answers", answers);
   }
   if (ecological2.length > 0) {
     answers += 1;
-    console.log("answers", answers);
-  }
-
-  if (proof1.length > 0) {
-    proofed += 1;
-    console.log("proofed", proofed);
   }
 
   // // to do: error messages  for email does not match
@@ -115,10 +88,8 @@ router.post("/", isLoggedMiddleware, parser.single("image"), (req, res) => {
       social1,
       ecological1,
       ecological2,
-
       economic1,
       answers,
-      proofed,
       owner: req.session.user._id,
     }).then((createdCompany) => {
       console.log(createdCompany);

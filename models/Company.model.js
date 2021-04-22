@@ -54,17 +54,17 @@ const companySchema = new Schema({
   },
 
   proof1: {
-    trype: String,
+    type: String,
   },
 
   proof2: {
-    trype: String,
+    type: String,
   },
   proof3: {
-    trype: String,
+    type: String,
   },
   proof4: {
-    trype: String,
+    type: String,
   },
   ecological1: {
     type: String,

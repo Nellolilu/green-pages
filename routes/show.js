@@ -25,6 +25,7 @@ router.get("/:mufasa", (req, res) => {
       }
       console.log("this is the company", thisCompany);
       console.log("this is the owner", isOwner);
+      console.log(thisCompany.proof1);
       res.render("show-company", { isOwner, thisCompany });
     });
 });
@@ -53,7 +54,7 @@ router.get("/:mufasa/edit-company", isLoggedMiddleware, (req, res) => {
           ),
         });
       } else {
-        res.redirect("/show", { thisCompany, isOwner });
+        res.redirect(`/show/${req.params.mufasa}`);
       }
     })
     .catch((err) => {
@@ -111,7 +112,6 @@ router.post(
             social1,
             ecological1,
             ecological2,
-
             economic1,
             answers,
           };
@@ -134,7 +134,7 @@ router.post(
             updater.answers += 1;
             console.log("answers", answers);
           }
-          if (updater.ecological1.length > 0) {
+          if (updater.ecological2.length > 0) {
             updater.answers += 1;
             console.log("answers", answers);
           }
@@ -144,7 +144,7 @@ router.post(
             new: true,
           }).then((newCompany) => {
             console.log("newCompany", newCompany);
-            res.render("show-company", { thisCompany: newCompany });
+            res.redirect(`/show/${req.params.mufasa}`);
           });
 
           // IF NOT OWNER

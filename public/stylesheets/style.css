@@ -4,7 +4,7 @@ font-family: 'DM Serif Display', serif; */
 
 body {
   padding: 0px 0px 120px 0px;
-  margin: 0;
+  margin: 0px 150px;
   font: 30px "DM Sans", Helvetica, Arial, sans-serif;
 }
 
@@ -112,12 +112,18 @@ a {
   background-color: darkcyan;
 }
 
+.results-parent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .results-flex {
+  width: 1000px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .questionaire {

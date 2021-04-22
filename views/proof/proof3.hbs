@@ -23,13 +23,15 @@
 
 {{#with thisCompany}}
 
-<form method="POST" action="/proof/{{_id}}/2" enctype="multipart/form-data">
-<h6>Do you pay taxes on your product/service where your costumer is based?</h4>
-{{#if economic1}}
-<p>you claim: {{economic1}}</p>
+<form method="POST" action="/proof/{{_id}}/3" enctype="multipart/form-data">
+<h6>Is your company running completely on renewable energy?</h4>
+
+{{#if ecological1}}
+<p>you claim: {{ecological1}}</p>
 {{else}}
 <p>no gave comment on this<p/> 
 {{/if}}
+
   
   {{!-- <input type= "file" name="proof1">
   <button type="submit">Upload</button> --}}
@@ -39,7 +41,7 @@
 upload a picture
 </label>
 
-<input id="file-upload" type="file" name="proof2"/>
+<input id="file-upload" type="file" name="proof3"/>
 <br>
 <a class="create-btn" href="javascript:;" onclick="parentNode.submit();">send</a>
 

@@ -1,11 +1,3 @@
-// NO NEEDED?
-// const SIZE_ENUM = require("../utils/size-enum");
-// const BRANCH_ENUM = require("../utils/branch-enum");
-// const createCompanyValidation = require("../utils/create-company-validation");
-// const isLoggedMiddleware = require("../middlewares/isLoggedIn");
-// const shouldNotBeLoggedIn = require("../middlewares/shouldNotBeLoggedIn");
-// const parser = require("../config/cloudinary");
-
 const Company = require("../models/Company.model");
 const User = require("../models/User.model");
 const router = require("express").Router();
@@ -22,6 +14,7 @@ router.get("/search-result", (req, res) => {
     .then((allCompanies) => {
       // console.log("allCompanies[0]", allCompanies[0]);
       // console.log("spread allCompanies[0]", { ...allCompanies[0].toJSON() });
+
       const proofArray = allCompanies.map((element) => {
         let proofed = 0;
         if (element.proof1) {
@@ -41,7 +34,7 @@ router.get("/search-result", (req, res) => {
 
       console.log("AFTER THE MAP: ", proofArray);
 
-      res.render("search-result", { companiesList: allCompanies });
+      res.render("search-result", { companiesList: proofArray });
     })
     .catch((err) => {
       console.log("err:", err);
