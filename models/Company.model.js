@@ -50,7 +50,7 @@ const companySchema = new Schema({
   social1: {
     type: String,
     max: 100,
-    default: "no comment",
+    // default: "no comment",
   },
 
   proof1: {
@@ -63,17 +63,25 @@ const companySchema = new Schema({
   proof3: {
     trype: String,
   },
-
+  proof4: {
+    trype: String,
+  },
   ecological1: {
     type: String,
     max: 100,
-    default: "no comment",
+    // default: "no comment",
+  },
+
+  ecological2: {
+    type: String,
+    max: 100,
+    // default: "no comment",
   },
 
   economic1: {
     type: String,
     max: 100,
-    default: "no comment",
+    // default: "no comment",
   },
 
   answers: { type: Number, default: 0 },

@@ -228,13 +228,13 @@ input[type="file"] {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .picture-proof-container {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 /*# sourceMappingURL=style.css.map */

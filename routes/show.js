@@ -78,6 +78,8 @@ router.post(
       description,
       social1,
       ecological1,
+      ecological2,
+
       economic1,
       answers,
     } = req.body;
@@ -108,6 +110,8 @@ router.post(
             description,
             social1,
             ecological1,
+            ecological2,
+
             economic1,
             answers,
           };
@@ -123,6 +127,10 @@ router.post(
             console.log("answers", answers);
           }
           if (updater.economic1.length > 0) {
+            updater.answers += 1;
+            console.log("answers", answers);
+          }
+          if (updater.ecological1.length > 0) {
             updater.answers += 1;
             console.log("answers", answers);
           }

@@ -1,0 +1,61 @@
+<section class="header">
+<div class="logo">
+  <a href="/"><h1>glass<br>org</h1></a>
+</div>
+<ul class="buttons-left">
+    <li><a href="/search-result" class="list">show companies</a></li>
+    <li><a href="/auth/login" class="user">(:>)</a></li>
+    <li><a href="/" class="door">>]]</a></li>
+</ul>
+{{!-- /* if not loged in signup, if logged in profile*/ change logge out direction--}}
+</section>
+
+
+
+<section id="body">
+
+<div class="picture-proof-container">
+<div><h4>proof your statement</h4></div>
+
+
+<div class="answers">
+
+
+{{#with thisCompany}}
+
+<form method="POST" action="/proof/{{_id}}/4" enctype="multipart/form-data">
+<h6>What percentage of the CO2 your buisness is producting are you compensating?</h4>
+<p>you claim: {{ecological2}}</p>
+  
+  {{!-- <input type= "file" name="proof1">
+  <button type="submit">Upload</button> --}}
+
+
+<label for="file-upload" class="file-upload">
+upload a picture
+</label>
+
+<input id="file-upload" type="file" name="proof4"/>
+<br>
+<a class="create-btn" href="javascript:;" onclick="parentNode.submit();">send</a>
+
+
+
+
+</form>
+
+
+
+<a class="home-btn" href="/show/{{_id}}/">go back</a>
+
+
+{{/with}}
+
+</div>
+
+</div>
+
+
+
+
+</section>

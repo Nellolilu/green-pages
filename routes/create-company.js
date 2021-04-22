@@ -56,6 +56,7 @@ router.post("/", isLoggedMiddleware, parser.single("image"), (req, res) => {
     description,
     social1,
     ecological1,
+    ecological2,
     economic1,
     otherBranches,
     otherSizes,
@@ -70,6 +71,10 @@ router.post("/", isLoggedMiddleware, parser.single("image"), (req, res) => {
     console.log("answers", answers);
   }
   if (ecological1.length > 0) {
+    answers += 1;
+    console.log("answers", answers);
+  }
+  if (ecological2.length > 0) {
     answers += 1;
     console.log("answers", answers);
   }
@@ -109,11 +114,14 @@ router.post("/", isLoggedMiddleware, parser.single("image"), (req, res) => {
       logo,
       social1,
       ecological1,
+      ecological2,
+
       economic1,
       answers,
       proofed,
       owner: req.session.user._id,
     }).then((createdCompany) => {
+      console.log(createdCompany);
       res.redirect("/");
     });
   });

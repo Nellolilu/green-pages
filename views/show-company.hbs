@@ -66,7 +66,7 @@
 
 {{#if this.proof1}}
 {{#unless ../isOwner}}
-<a href="{{this.proof1}}">show proof</a>
+<a href="{{this.proof1}}" target="_blank">show proof</a>
 {{/unless}}
 {{/if}}
 
@@ -84,11 +84,11 @@
 
 
 <div class="answers">
-<h6>Do you pay taxes on your product/service where your costumer is based?</h6>
+<h6>What percentage of the CO2 your buisness is producting are you compensating?</h6>
 
 <div class="proof-container">
 
-<p>{{ecological1}}<p/> 
+<p>{{ecological2}}<p/> 
 {{#if ../isOwner}}
 {{#unless this.proof2}}
 <a href="/proof/{{this._id}}/2">proof it!</a>
@@ -98,7 +98,7 @@
 
 {{#if this.proof2}}
 {{#unless ../isOwner}}
-<a href="{{this.proof2}}">show proof</a>
+<a href="{{this.proof2}}" target="_blank">show proof</a>
 {{/unless}}
 {{/if}}
 
@@ -106,7 +106,7 @@
 
 {{#if this.proof2}}
 {{#if ../isOwner}}
-<a href="/proof/{{this._id}}/2">proofed</a>
+<a href="/proof/{{this._id}} /2">proofed</a>
 {{/if}}
 {{/if}}
 
@@ -116,26 +116,65 @@
 <div class="answers">
 <h6>Is your company running completely on renewable energy?</h6>
 
-{{!-- <div class="proof-container">
+<div class="proof-container">
 
-<p>{{economic1}}<p/> 
+<p>{{ecological1}}<p/> 
 {{#if ../isOwner}}
+{{#unless this.proof3}}
 <a href="/proof/{{this._id}}/3">proof it!</a>
+{{/unless}}
 {{/if}}
 
 
 {{#if this.proof3}}
 {{#unless ../isOwner}}
-<a href="{{this.proof3}}">show proof</a>
+<a href="{{this.proof3}}" target="_blank">show proof</a>
 {{/unless}}
-{{/if}} --}}
+{{/if}}
 
+
+
+{{#if this.proof3}}
+{{#if ../isOwner}}
+<a href="/proof/{{this._id}}/3">proofed</a>
+{{/if}}
+{{/if}}
 
 </div>
+</div>
 
-{{!-- <div class="answers">4</div> --}}
+
+
+<div class="answers">
+<h6>Is your company running completely on renewable energy?</h6>
+
+<div class="proof-container">
+
+<p>{{ecological1}}<p/> 
+{{#if ../isOwner}}
+{{#unless this.proof4}}
+<a href="/proof/{{this._id}}/4">proof it!</a>
+{{/unless}}
+{{/if}}
+
+
+{{#if this.proof4}}
+{{#unless ../isOwner}}
+<a href="{{this.proof4}}" target="_blank">show proof</a>
+{{/unless}}
+{{/if}}
+
+
+
+{{#if this.proof4}}
+{{#if ../isOwner}}
+<a href="/proof/{{this._id}}/4">proofed</a>
+{{/if}}
+{{/if}}
 
 </div>
+</div>
+
 
 
 </article>
