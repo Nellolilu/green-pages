@@ -1,6 +1,6 @@
 <section class="header">
-<div class="logo">
-  <a href="/"><h1>glass<br>org</h1></a>
+<div >
+  <a href="/"><img src="https://res.cloudinary.com/dk9vuaejm/image/upload/v1619177346/companylogos/07Zeichenfl%C3%A4che_2_2x_zvva5j.png" alt=""></a>
 </div>
 <ul class="buttons-left">
     <li><a href="/search-result" class="list">show companies</a></li>
@@ -10,13 +10,15 @@
 {{!-- /* if not loged in signup, if logged in profile*/ change logge out direction--}}
 </section>
 
-<section id="body">
-<h4>create a listing</h4>
+<section id="questionaire-body">
+  <div class="left"><h4>create a</h4></div>
+  <div class="right">
+
 
 <section class="questionaire">
-<h4>of your company</h4>
+<h4>listing of your company</h4>
 <form method="POST" action="/create-company" enctype="multipart/form-data">
-  <input class="form-input" placeholder= "company Name" name="name" value="{{name}}">
+  <input class="form-input" placeholder= "company name" name="name" value="{{name}}">
   <input class="form-input" placeholder= "webpage" type="url" name="url" value="{{url}}">
   <input class="form-input" placeholder= "email" type="email" name="email" value="{{email}}">
   <input class="form-input" placeholder= "adress" name="adress" value="{{adress}}">
@@ -62,4 +64,5 @@
 {{#if errorMessage}}
 <h4 class="err" >{{errorMessage}}</h4>
 {{/if}}
+</div>
 </section>

@@ -1,7 +1,6 @@
 <section class="header">
-<div class="logo">
-  <a href="/"><h1>glass<br>org</h1></a>
-
+<div >
+  <a href="/"><img src="https://res.cloudinary.com/dk9vuaejm/image/upload/v1619177346/companylogos/07Zeichenfl%C3%A4che_2_2x_zvva5j.png" alt=""></a>
 </div>
 <ul class="buttons-left">
     <li><a href="/search-result" class="list">show companies</a></li>
@@ -23,8 +22,9 @@
 <img src="{{this.logo}}" alt="this.name">
 <h2>{{name}}</h2>
 </div>
-<a href="{{url}}">{{url}}</a>
 
+<div class="company-specs">
+<a href="{{url}}">{{url}}</a>
 <p>{{email}}</p>
 <p>{{adress}}</p>
 <p>company size: {{size}}</p>
@@ -45,6 +45,8 @@
 {{/if}}
 <br>
 <br>
+</div>
+
 </article>
 
 
@@ -52,7 +54,7 @@
 <div class="answers">
 
 <h2>...answered the following questions</h2>
-<h6>Do you have more male or more female positions in leading roles of your business?</p>
+<h6>Do you have more male or more female positions in leading roles of your business?</h6>
 
 <div class="proof-container">
 
@@ -61,6 +63,7 @@
 {{else}}
 <p>no comment<p/> 
 {{/if}}
+<br>
 
 {{#if ../isOwner}}
 {{#unless this.proof1}}
@@ -76,12 +79,14 @@
 {{/if}}
 
 
+<div class="check-owner">
 {{#if this.proof1}}
 {{#if ../isOwner}}
 <a href="{{this.proof1}}" target="_blank">proved</a>
 <a href="/proof/{{this._id}}/1">change picture</a>
 {{/if}}
 {{/if}}
+</div>
 
 </div>
 
@@ -114,13 +119,14 @@
 {{/if}}
 
 
-
+<div class="check-owner">
 {{#if this.proof2}}
 {{#if ../isOwner}}
 <a href="{{this.proof2}}" target="_blank">proved</a>
 <a href="/proof/{{this._id}}/2">change picture</a>
 {{/if}}
 {{/if}}
+</div>
 
 </div>
 </div>
@@ -151,11 +157,12 @@
 {{/if}}
 
 
-
+<div class="check-owner">
 {{#if this.proof3}}
 {{#if ../isOwner}}
 <a href="{{this.proof3}}" target="_blank">proved</a>
 <a href="/proof/{{this._id}}/3">change picture</a>
+</div>
 
 {{/if}}
 {{/if}}
@@ -191,13 +198,15 @@
 {{/if}}
 
 
-
+<div class="check-owner">
 {{#if this.proof4}}
 {{#if ../isOwner}}
 <a href="{{this.proof4}}" target="_blank">proved</a>
 <a href="/proof/{{this._id}}/4">change picture</a>
 {{/if}}
 {{/if}}
+</div>
+
 
 </div>
 </div>

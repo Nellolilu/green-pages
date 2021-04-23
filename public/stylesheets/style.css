@@ -3,9 +3,13 @@
 font-family: 'DM Serif Display', serif; */
 
 body {
-  padding: 0px 0px 120px 0px;
-  margin: 0px 150px;
+  padding: 50px 0px 120px 100px;
+  width: 1300px;
   font: 30px "DM Sans", Helvetica, Arial, sans-serif;
+  background-color: rgba(247, 247, 247);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .err {
@@ -19,7 +23,7 @@ ul {
 }
 
 .logo {
-  font-size: 58px;
+  height: 200px;
   margin-left: 80px;
 }
 
@@ -28,6 +32,7 @@ ul {
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
+  margin-bottom: 80px;
 }
 
 .buttons-left {
@@ -42,21 +47,22 @@ a {
   margin: 0px 10px;
   font-size: 24px;
   text-decoration: none;
-  color: darkblue;
+  color: #050d4f;
+  font-weight: 500;
 }
-
+/* 
 .logo a {
   font-size: 58px;
   color: black;
   text-align: start;
   margin: 0px;
-}
+} */
 
 #textbody {
   display: flex;
   flex-direction: column;
-  margin: 0px 200px;
-  font-size: 28px;
+  margin: 0px 200px 30px;
+  font-size: 24px;
   font-weight: 400;
 }
 
@@ -64,19 +70,33 @@ a {
   margin: 0px 200px;
 }
 
+/*needs for branch */
 .form-input {
+  border-radius: 20px;
+  border: none;
   width: 650px;
-  height: 30px;
+  height: 40px;
   font-size: 16px;
   margin-bottom: 10px;
+  padding-left: 20px;
 }
 
+input {
+  background-color: #e0ebe8;
+  border-radius: 20px;
+  border: none;
+  width: 650px;
+  height: 40px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  padding-left: 20px;
+}
 #form a {
   font-size: 24px;
 }
 
 #body {
-  margin: 0px 200px;
+  padding: 0px 200px;
 }
 
 .filter {
@@ -84,58 +104,82 @@ a {
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  font-size: 16px;
-  margin: 0px;
+  font-size: 24px;
+  margin: 0px 0px 30px;
   padding: 0px;
 }
 
 .filter a {
-  font-size: 16px;
+  font-size: 24px;
 }
 
 .one-result {
   padding: 30px;
-  margin: 30px 10px;
+  margin: 20px 20px;
   width: 250px;
-  background-color: lightblue;
+  background-color: #a4c1ba;
   font-size: 0.6em;
-  line-height: 0.6em;
+  line-height: 0.9em;
+  border-radius: 8px;
 }
 
 .show-btn {
-  margin: 50px 0px 15px -5px;
+  /* margin: 30px 0px 15px -5px; */
+  margin: 40px 0px 15px;
 }
 
 .one-result a {
   font-size: 1em;
   padding: 8px;
-  background-color: darkcyan;
+  /* background-color: #e0ebe8; */
+  color: rgba(247, 247, 247);
+  border-radius: 8px;
+  font-weight: 400;
 }
 
 .results-parent {
   display: flex;
   align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 .results-flex {
-  width: 1000px;
+  width: 1050px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: flex-start;
 }
 
-.questionaire {
-  margin-left: 100px;
+#questionaire-body {
+  margin-left: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.left {
+  width: 200px;
+}
+
+.right {
+  width: 720px;
 }
 
 .file-upload {
-  border: 1px solid #ccc;
   display: inline-block;
-  padding: 6px 6px;
   cursor: pointer;
+  background-color: white;
+  border-radius: 20px;
+  border: none;
+  width: 200px;
+  height: 30px;
   font-size: 16px;
+  margin-bottom: 10px;
+  padding-left: 30px;
+  padding-top: 10px;
 }
 
 input[type="file"] {
@@ -155,7 +199,7 @@ input[type="file"] {
 }
 
 .create-btn {
-  border: 1px solid #ccc;
+  background-color: white;
   display: inline-block;
   padding: 6px 6px;
   cursor: pointer;
@@ -163,6 +207,13 @@ input[type="file"] {
   margin: 30px 0px;
   color: black;
   font-weight: 500;
+  border-radius: 20px;
+  border: none;
+  width: 200px;
+  height: 40px;
+  margin-bottom: 20px;
+  padding-left: 30px;
+  padding-top: 15px;
 }
 
 .home-btn {
@@ -170,7 +221,7 @@ input[type="file"] {
 }
 
 .show-company {
-  margin-left: 100px;
+  /* margin-left: 100px; */
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -178,7 +229,7 @@ input[type="file"] {
 
 .show-company p {
   font-size: 16px;
-  color: gray;
+  color: #050d4f;
 }
 
 .show-company a {
@@ -207,27 +258,37 @@ input[type="file"] {
   margin: 0px;
 }
 
+.company-specs {
+  margin-top: 95px;
+}
+
 .answer-container {
   margin: 0px 80px 0px 120px;
 }
 .answers {
-  width: 300px;
+  width: 480px;
   margin: 0px;
 }
 
 .answers h2 {
-  margin: 35px 0px 40px 0px;
+  margin: 35px 0px 70px 0px;
 }
 
 .answers h6 {
   font-weight: normal;
   font-size: 24px;
-  margin: 0px;
+  margin: 20px 0px;
 }
 
 .answers p {
   font-size: 24px;
-  color: darkblue;
+  font-weight: 500;
+  color: #050d4f;
+}
+
+.check-owner {
+  display: flex;
+  flex-direction: column;
 }
 
 .proof-container {
@@ -235,6 +296,7 @@ input[type="file"] {
   flex-direction: row;
   align-items: flex-end;
   justify-content: space-between;
+  margin: 20px 0px 60px;
 }
 
 .picture-proof-container {

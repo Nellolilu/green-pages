@@ -1,20 +1,18 @@
 <section class="header">
-<div class="logo">
-  <a href="/"><h1>glass<br>org</h1></a>
+<div >
+  <a href="/"><img src="https://res.cloudinary.com/dk9vuaejm/image/upload/v1619177346/companylogos/07Zeichenfl%C3%A4che_2_2x_zvva5j.png" alt=""></a>
 </div>
 <ul class="buttons-left">
     <li><a href="/create-company" class="list">list your company</a></li>
-    <li><a href="/auth/login" class="user">(:>)</a></li>
+    <li><a href="/profile" class="user">(:>)</a></li>
     <li><a href="/" class="door">>]]</a></li>
 </ul>
 {{!-- /* if not loged in signup, if logged in profile*/ change logge out direction--}}
 </section>
 
-
-<section id="body">
+<section >
 
 {{#if companiesList}}
-<h4>found:</h4>
 <ul class="filter">
 <li><h4>filter by branch:</h4></li>  
   <li><a href="/branch=service">service</a></li>
@@ -32,8 +30,8 @@
 <p>{{this.adress}}</p>
 <p>{{this.url}}</p>
 <p>answered: {{this.answers}}</p>
-<p>proofed: {{this.proofed}}</p>
-<div class="show-btn"><a href="/show/{{this._id}}">show all<br> </a></div>
+<p>proved: {{this.proofed}}</p>
+<div class="show-btn"><a href="/show/{{this._id}}">show more<br> </a></div>
 </article>
 {{/each}}
 </div>

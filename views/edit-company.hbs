@@ -1,6 +1,6 @@
 <section class="header">
-<div class="logo">
-  <a href="/"><h1>glass<br>org</h1></a>
+<div >
+  <a href="/"><img src="https://res.cloudinary.com/dk9vuaejm/image/upload/v1619177346/companylogos/07Zeichenfl%C3%A4che_2_2x_zvva5j.png" alt=""></a>
 </div>
 <ul class="buttons-left">
     <li><a href="/search-result" class="list">show companies</a></li>
@@ -10,10 +10,12 @@
 {{!-- /* if not loged in signup, if logged in profile*/ change logge out direction--}}
 </section>
 
-<section id="body">
-<h4>edit this listing</h4>
+<section id="questionaire-body">
+  <div class="left"><h4>edit</h4></div>
+  <div class="right">
 
 <section class="questionaire">
+  <h4>your company</h4>
 
 {{#with company}}
 
@@ -81,4 +83,5 @@
 {{#if errorMessage}}
 <h4 class="err" >{{errorMessage}}</h4>
 {{/if}}
+</div>
 </section>
