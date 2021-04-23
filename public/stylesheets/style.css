@@ -325,4 +325,15 @@ input[type="file"] {
 .welcome {
   margin-bottom: 100px;
 }
+
+.listings-parent {
+  display: flex;
+  flex-direction: row;
+}
+
+.gray {
+  font-size: 16px;
+  color: gray;
+  margin-top: 180px;
+}
 /*# sourceMappingURL=style.css.map */
