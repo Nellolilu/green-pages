@@ -44,28 +44,28 @@ router.get("/search-result", (req, res) => {
 });
 
 router.get("/branch=production", (req, res) => {
-  Company.find({ branch: { $eq: "Production" } }).then((foundByBranch) => {
+  Company.find({ branch: { $eq: "production" } }).then((foundByBranch) => {
     console.log("foundByBranch", foundByBranch);
     res.render("search-result", { companiesList: foundByBranch });
   });
 });
 
 router.get("/branch=service", (req, res) => {
-  Company.find({ branch: { $eq: "Service" } }).then((foundByBranch) => {
+  Company.find({ branch: { $eq: "service" } }).then((foundByBranch) => {
     console.log("foundByBranch", foundByBranch);
     res.render("search-result", { companiesList: foundByBranch });
   });
 });
 
 router.get("/branch=other", (req, res) => {
-  Company.find({ branch: { $eq: "Other" } }).then((foundByBranch) => {
+  Company.find({ branch: { $eq: "other" } }).then((foundByBranch) => {
     console.log("foundByBranch", foundByBranch);
     res.render("search-result", { companiesList: foundByBranch });
   });
 });
 
 router.get("/branch=sales", (req, res) => {
-  Company.find({ branch: { $eq: "Sales" } }).then((foundByBranch) => {
+  Company.find({ branch: { $eq: "sales" } }).then((foundByBranch) => {
     console.log("foundByBranch", foundByBranch);
     res.render("search-result", { companiesList: foundByBranch });
   });
