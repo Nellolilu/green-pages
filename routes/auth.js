@@ -119,7 +119,7 @@ router.post("/login", shouldNotBeLoggedIn, (req, res, next) => {
         }
         req.session.user = user;
         // req.session.user = user._id; // ! better and safer but in this case we saving the entire user object
-        return res.redirect("/");
+        return res.redirect("/profile");
       });
     })
     .catch((err) => {
@@ -152,25 +152,22 @@ router.post("/edit-user", (req, res) => {
 
   console.log(req.body);
 
-    User.findByIdAndUpdate(
-      req.session.user._id, 
-      { name, email, password },
-      {new: true})
-      .then((newUser) => {
-      
-        console.log("newUser", newUser);
-        req.session.user = newUser;
-        res.redirect("/profile");
-      }
-    );
+  User.findByIdAndUpdate(
+    req.session.user._id,
+    { name, email, password },
+    { new: true }
+  ).then((newUser) => {
+    console.log("newUser", newUser);
+    req.session.user = newUser;
+    res.redirect("/profile");
+  });
 });
 
-
 router.get("/delete", isLoggedIn, (req, res) => {
-  User.findByIdAndDelete(req.session.user._id)
-  .then(() => {
+  User.findByIdAndDelete(req.session.user._id).then(() => {
+    res.clearCookie("connect.sid");
     res.redirect("/");
   });
-})
+});
 
 module.exports = router;

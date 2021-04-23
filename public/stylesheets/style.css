@@ -15,7 +15,8 @@ body {
 .err {
   font-size: 16px;
   color: red;
-  margin-left: 100px;
+  margin-left: 250px;
+  margin-top: 40px;
 }
 
 ul {
@@ -304,5 +305,9 @@ input[type="file"] {
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
+}
+
+.welcome {
+  margin-bottom: 100px;
 }
 /*# sourceMappingURL=style.css.map */

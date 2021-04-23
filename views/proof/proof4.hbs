@@ -1,21 +1,20 @@
 <section class="header">
-<div class="logo">
-  <a href="/"><h1>glass<br>org</h1></a>
+<div >
+  <a href="/"><img src="https://res.cloudinary.com/dk9vuaejm/image/upload/v1619177346/companylogos/07Zeichenfl%C3%A4che_2_2x_zvva5j.png" alt=""></a>
 </div>
 <ul class="buttons-left">
     <li><a href="/search-result" class="list">show companies</a></li>
     <li><a href="/auth/login" class="user">(:>)</a></li>
-    <li><a href="/" class="door">>]]</a></li>
+    <li><a href="/auth/logout" class="door">>]]</a></li>
 </ul>
 {{!-- /* if not loged in signup, if logged in profile*/ change logge out direction--}}
 </section>
 
 
-
 <section id="body">
 
 <div class="picture-proof-container">
-<div><h4>proof your statement</h4></div>
+<div><h4>proof your statement:</h4></div>
 
 
 <div class="answers">
@@ -24,6 +23,7 @@
 {{#with thisCompany}}
 
 <form method="POST" action="/proof/{{_id}}/4" enctype="multipart/form-data">
+<h4></h4>
 <h6>What percentage of the CO2 your business is producing are you compensating?</h6>
 {{#if ecological2}}
 <p>you claim: {{ecological2}}</p>
