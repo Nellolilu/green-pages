@@ -22,7 +22,6 @@
 </div>
 
 
-<h4>these are your listings:</h4>
 
 
 
@@ -32,6 +31,7 @@
 {{#if ../ownersCompanies}}
 {{#each ../ownersCompanies}}
 <article class="one-result">
+  <h4>these are your listings:</h4>
   <h4>{{this.name}}</h4>
 <p>{{this.adress}}</p>
 <p>{{this.url}}</p>
@@ -44,8 +44,8 @@
 </div>
 
 {{else}}
-<h4> no companys listed yet,</h4>
-<a href="/create-company">create one!</a>
+
+<a href="/create-company">no companys listed yet, create one!</a>
 {{/if}}
 
 {{/with}}
